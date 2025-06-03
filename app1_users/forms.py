@@ -28,9 +28,10 @@ class UserSignUpForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email')
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(label='Email', required=True ,widget=forms.EmailInput(attrs={'id':'email-field', 'class':'input'}))
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'id':'password-field', 'class':'input'}))
     user_type = forms.ChoiceField(
         choices=[('customer', 'Customer'), ('seller', 'Seller'), ('admin', 'Admin')],
-        label='Login as'
+        label='Login as',
+        widget= forms.Select(attrs={'id':'user-type-field', 'class':'input'})
     )

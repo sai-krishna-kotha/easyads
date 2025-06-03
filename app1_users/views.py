@@ -69,11 +69,11 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('home')  # or 'user_login' if you prefer
+    return redirect('user_login')  # or 'user_login' if you prefer
 
 
 def home(request):
     return render(request, 'home.html')
 
 def reset_pass(request):
-    pass
+    return render(request, "app1_users/reset-pass.html")

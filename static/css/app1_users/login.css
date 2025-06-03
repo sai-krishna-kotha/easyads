@@ -1,0 +1,51 @@
+.h2-login{
+    text-align: center;
+    margin-bottom: 0;
+}
+.signin-login{
+    text-align: center;
+}
+.container-login{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+}
+.input{
+    height: 25px;
+    width: 400px;
+}
+.forget-password-login{
+    float: right;
+}
+#user-type-field{
+    width: 410px;
+    height: 30px;
+    /* padding: 8px 0px; */
+}
+.btn-login{
+    width: 410px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    /* padding: 8px 100px; */
+}
+.btn-login:hover{
+    opacity: 0.8;
+}
+.btn-login:active{
+    opacity: 0.5;
+}
+.li-login{
+    color: red;
+    list-style: none;
+    text-align: center;
+}
+.ul-login{
+    margin: 0;
+    padding: 0;
+}

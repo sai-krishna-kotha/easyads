@@ -10,8 +10,10 @@
 
         {% endblock title %}
     </title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-
+    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> {% endcomment %}
+    {% block links %}
+    
+    {% endblock links %}
     <link rel="stylesheet" href='{% static "css/base.css" %}'>
 </head>
 <body>
@@ -19,20 +21,20 @@
         <nav class="navbar">
             <div class="nav1">
                 <img src='{% static "images/logo-icon.svg" %}' alt="Logo" class="logo">
-                <a href="#"><span class="title">EasyAd</span></a>
+                <a href="#" class="link-base"><span class="title">EasyAd</span></a>
             </div>
             <div class="nav2">
                 <div>
-                    <a href="">Home</a>
+                    <a href="" class="link-base">Home</a>
                 </div>
                 <div>
-                    <a href="">About</a>
+                    <a href="" class="link-base">About</a>
                 </div>
                 <div>
-                    <a href="">Contact</a>
+                    <a href="" class="link-base">Contact</a>
                 </div>
                 <div>
-                    <a href="">Coupons and Offers</a>
+                    <a href="" class="link-base">Coupons and Offers</a>
                 </div>
             </div>
             <div class="nav3">
@@ -55,20 +57,17 @@
             </div>
             <div class="nav4">
                 <div>
-                    <button class="login-btn btn">Login</button>
+                    <a href='{% url "user_login" %}' class="link-base"><button class="login-btn btn">Login</button></a>
                 </div>
                 <div>
-                    <button class="signup-btn btn">Signup</button>
+                    <a href='{% url "signup" %}' class="link-base"><button class="signup-btn btn">Signup</button></a>
                 </div>
             </div>
         </nav>
     </header>
-    <section>
-        <h1>Hii</h1>
-        <h2>Hello</h2>
-    </section>
+    {% block section %}
+    {% endblock section %}
     <footer>
-
     </footer>
 </body>
 </html>

@@ -1,2 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Home - EasyAd
+{% endblock title %}
+
+{% block section %}
+<h1>{{user.first_name}}</h1>
+<a href='{% url "logout" %}'>Logout</a>
+
+{% endblock section %}
 

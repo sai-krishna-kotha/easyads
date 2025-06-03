@@ -1,26 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Login</title>
-</head>
-<body>
-    <h2>Login</h2>
+{% extends "base.html" %}
+{% load static %}
 
-    {% if messages %}
-      <ul>
-        {% for message in messages %}
-          <li style="color: red;">{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+{% block title %}
+Login - EasyAd
+{% endblock title %}
 
+{% block links %}
+<link rel="stylesheet" href='{% static "css/app1_users/login.css" %}'>
+{% endblock links %}
+
+{% block section %}
+<h2 class="h2-login">Login</h2>
+<div class="signin-login">
+    Signin to continue
+</div>
+
+{% if messages %}
+<ul class="ul-login">
+    {% for message in messages %}
+    <li class="li-login">{{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<br>
+<br>
+
+
+<form method="POST">
+    {% csrf_token %}
+  <div class="container-login">
+    <div>
+      <div>
+        <label for="email-field">Email</label> <br>
+        {{form.email}}
+      </div>
+    </div>
+    <div>
+      <div>
+        <label for="password-field">Password</label> <br>
+        {{form.password}}
+      </div>
+    </div>
+    <div>
+      <div>
+        <label for="user-type-field">Role</label> <br>
+        {{form.user_type}}
+      </div>
+    </div>
+    <div>
+      <div>
+        <a href='{% url "reset-pass" %}'><div class="forget-password-login">Forgot Password?</div></a> <br>
+        <button type="submit" class="btn-login">Login</button>
+      </div>
+    </div>
+    <div>
+      Don't have an account? <a href='{% url "signup" %}'>Signup</a>
+    </div>
+  </div>
+</form>
+
+{% comment %} 
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        <label for="email-field">Email</label>
+        {{ form.email }}
+
         <button type="submit">Login</button>
     </form>
     <div>New User?
       <a href="/users/signup/">Signup</a>
-    </div>
-</body>
-</html>
+    </div> {% endcomment %}
+{% endblock section %}

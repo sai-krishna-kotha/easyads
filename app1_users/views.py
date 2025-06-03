@@ -47,7 +47,7 @@ def user_login(request):
                 if user is not None:
                     print(user.user_type)
                     login(request, user)
-                    return redirect('homepage')  # change 'home' to your actual homepage url name
+                    return redirect('home')  # change 'home' to your actual home url name
                 else:
                     messages.error(request, "Invalid password.")
             except User.DoesNotExist:
@@ -69,9 +69,11 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('homepage')  # or 'user_login' if you prefer
+    return redirect('home')  # or 'user_login' if you prefer
 
 
-def homepage(request):
-    return render(request, 'homepage.html')
+def home(request):
+    return render(request, 'home.html')
 
+def reset_pass(request):
+    pass

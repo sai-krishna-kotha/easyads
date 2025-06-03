@@ -1,0 +1,124 @@
+body{
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    padding-top: 70px;
+}
+.logo{
+    width: 40px;
+}
+.title{
+    font-size: 30px;
+}
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0px;
+    margin: 0;
+    background-color: rgba(12, 39, 33,1);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.nav1{
+    width: 13%;
+}
+.nav2{
+    /* border: 1px solid black; */
+    width: 29%;
+    align-items: center;
+}
+.nav3{
+    width: 40%;
+    align-items: center;
+}
+.nav4{
+    width: 18%;
+    align-items: end;
+}
+.nav2 div, .nav3 div, .nav4 div{
+    vertical-align: middle;
+}
+.nav2 div a{
+    text-decoration: none;
+}
+.nav2 div a:hover{
+    color: gray;
+}
+.nav1, .nav2, .nav3, .nav4{
+    justify-content: space-evenly;
+    display: flex;
+}
+div a{
+    text-decoration: none;
+    color: white;
+}
+.nav-field{
+    /* height: 25px;
+    width: 400px; */
+    padding: 6px 20px;
+    border: 0px;
+    border-radius: 35px;
+    background-color: rgb(12, 39, 33);
+    /* box-shadow: 2px 1px 1px gray; */
+    color: white;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition:
+    font-weight 0.2s, font-size 0.2s;
+}
+.nav-field:hover{
+    cursor: pointer;
+    color: gray;
+}
+.nav4 .login-btn, .nav4 .signup-btn{
+    padding: 8px 35px;
+    background-color: green;
+    border: 0px;
+    color: white;
+    /* border-radius: 7px; */
+}
+.search-field{
+    padding: 8px 30px;
+    /* border-radius: 7px; */
+    border: 0px;
+    vertical-align: middle;
+    background-color: white;
+    outline: none;
+}
+.search-btn{
+    /* border-radius: 7px; */
+    border: 0;
+    /* box-shadow: 2px 2px 1px; */
+    padding: 8px 15px;
+    background-color: green;
+    color: white;
+}
+
+.btn{
+    font-family: 'Inter', sans-serif;
+}
+.btn:hover{
+    opacity: 0.8;
+}
+.btn:active{
+    opacity: 0.4;
+}
+
+h1{
+    height: 3000px;
+    width: 1000px;
+    margin: 0;
+    background-color: aquamarine;
+}
+h2{
+    height: 3000px;
+    width: 1000px;
+    margin: 0;
+    background-color: aqua;
+
+}

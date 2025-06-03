@@ -10,10 +10,65 @@
 
         {% endblock title %}
     </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href='{% static "css/base.css" %}'>
 </head>
 <body>
     <header>
-        
+        <nav class="navbar">
+            <div class="nav1">
+                <img src='{% static "images/logo-icon.svg" %}' alt="Logo" class="logo">
+                <a href="#"><span class="title">EasyAd</span></a>
+            </div>
+            <div class="nav2">
+                <div>
+                    <a href="">Home</a>
+                </div>
+                <div>
+                    <a href="">About</a>
+                </div>
+                <div>
+                    <a href="">Contact</a>
+                </div>
+                <div>
+                    <a href="">Coupons and Offers</a>
+                </div>
+            </div>
+            <div class="nav3">
+                <div>
+                    <select name="category" id="category" class="nav-field">
+                        <option value="">Category</option>
+                    </select>
+                </div>
+                <div>
+                    <select name="city" id="city" class="nav-field">
+                        <option value="">City</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="text" placeholder="Search keywords" class="search-field"></li>
+                </div>
+                <div>
+                    <button class="search-btn btn">Search</button>
+                </div>
+            </div>
+            <div class="nav4">
+                <div>
+                    <button class="login-btn btn">Login</button>
+                </div>
+                <div>
+                    <button class="signup-btn btn">Signup</button>
+                </div>
+            </div>
+        </nav>
     </header>
+    <section>
+        <h1>Hii</h1>
+        <h2>Hello</h2>
+    </section>
+    <footer>
+
+    </footer>
 </body>
 </html>

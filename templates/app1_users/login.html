@@ -10,11 +10,11 @@ Login - EasyAd
 {% endblock links %}
 
 {% block section %}
+{% if not user.is_authenticated %}
 <h2 class="h2-login">Login</h2>
 <div class="signin-login">
     Signin to continue
 </div>
-
 {% if messages %}
 <ul class="ul-login">
     {% for message in messages %}
@@ -22,53 +22,44 @@ Login - EasyAd
     {% endfor %}
 </ul>
 {% endif %}
-
 <br>
 <br>
-
-
 <form method="POST">
     {% csrf_token %}
-  <div class="container-login">
-    <div>
-      <div>
-        <label for="email-field">Email</label> <br>
-        {{form.email}}
-      </div>
+    <div class="container-login">
+        <div>
+            <div>
+                <label for="email-field">Email</label> <br>
+                {{form.email}}
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="password-field">Password</label> <br>
+                {{form.password}}
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="user-type-field">Role</label> <br>
+                {{form.user_type}}
+            </div>
+        </div>
+        <div>
+            <div>
+                <a href='{% url "reset-pass" %}'>
+                    <div class="forget-password-login">Forgot Password?</div>
+                </a>
+                <br>
+                <button type="submit" class="btn-login">Login</button>
+            </div>
+        </div>
+        <div>
+            Don't have an account? <a href='{% url "signup" %}'>Signup</a>
+        </div>
     </div>
-    <div>
-      <div>
-        <label for="password-field">Password</label> <br>
-        {{form.password}}
-      </div>
-    </div>
-    <div>
-      <div>
-        <label for="user-type-field">Role</label> <br>
-        {{form.user_type}}
-      </div>
-    </div>
-    <div>
-      <div>
-        <a href='{% url "reset-pass" %}'><div class="forget-password-login">Forgot Password?</div></a> <br>
-        <button type="submit" class="btn-login">Login</button>
-      </div>
-    </div>
-    <div>
-      Don't have an account? <a href='{% url "signup" %}'>Signup</a>
-    </div>
-  </div>
 </form>
-
-{% comment %} 
-    <form method="POST">
-        {% csrf_token %}
-        <label for="email-field">Email</label>
-        {{ form.email }}
-
-        <button type="submit">Login</button>
-    </form>
-    <div>New User?
-      <a href="/users/signup/">Signup</a>
-    </div> {% endcomment %}
+{% else %}
+<h1>{{user.first_name}}, you are Already logged in</h1>
+{% endif %}
 {% endblock section %}

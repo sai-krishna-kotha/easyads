@@ -73,7 +73,24 @@ def user_logout(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    category_options = {
+        "books": "Books",
+        "clothes": "Clothes"
+    }
+    city_options = {
+        "newyork": "New York",
+        "london": "London"
+    }
+
+    context = {
+        "category_options": category_options,
+        "city_options": city_options
+    }
+    return render(request, "home.html", context)
+    # return render(request, 'home.html')
 
 def reset_pass(request):
     return render(request, "app1_users/reset-pass.html")
+
+def filter_fields(request):
+    pass

@@ -21,7 +21,7 @@
         <nav class="navbar">
             <div class="nav1">
                 <img src='{% static "images/logo-icon.svg" %}' alt="Logo" class="logo">
-                <a href="#" class="link-base"><span class="title">EasyAd</span></a>
+                <a href='{% url "home" %}' class="link-base"><span class="title">EasyAd</span></a>
             </div>
             <div class="nav2">
                 <div>
@@ -39,13 +39,20 @@
             </div>
             <div class="nav3">
                 <div>
-                    <select name="category" id="category" class="nav-field">
+                    <select name="category" id="category" class="nav-field category-wrap-text">
                         <option value="">Category</option>
+                        {% block select_category %}
+                        
+                        {% endblock select_category %}
+                        
                     </select>
                 </div>
                 <div>
-                    <select name="city" id="city" class="nav-field">
+                    <select name="city" id="city" class="nav-field city-wrap-text">
                         <option value="">City</option>
+                        {% block select_city %}
+                        
+                        {% endblock select_city %}
                     </select>
                 </div>
                 <div>

@@ -8,7 +8,9 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (_('Personal info'), {'fields': ('first_name',)}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (_('Permissions'), {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+        }),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
         (_('Role Info'), {'fields': ('user_type',)}),
     )
@@ -21,3 +23,6 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('email', 'first_name', 'user_type', 'is_staff')
     search_fields = ('email', 'first_name')
     ordering = ('email',)
+
+    # Tell Django to use email as the login field
+    filter_horizontal = ('groups', 'user_permissions')

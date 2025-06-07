@@ -5,24 +5,48 @@
 Signup - EasyAd
 {% endblock title %}
 
+{% block links %}
+<link rel="stylesheet" href='{% static "css/app1_users/signup.css" %}'>
+{% endblock links %}
+
 {% block section %}
-<h2>Sign Up</h2>
-
-    {% if messages %}
-      <ul>
-        {% for message in messages %}
-          <li style="color: red;">{{ message }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-    <div>
-      Already User?
-      <a href="/users/login/">Login</a>
+{% if not user.is_authenticated %}
+<h2 class="h2-signup">Create new Account</h2>
+<div class="signin-signup">
+    Already Registered? <a href="{% url 'user_login' %}">Login</a>
+</div>
+{% if messages %}
+<ul class="ul-signup">
+    {% for message in messages %}
+    <li class="li-signup">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="container-signup">
+        <div>
+            <label for="full-name-field">Full Name</label>
+            {{ form.full_name }}
+        </div>
+        <div>
+            <label for="email-field">Email</label>
+            {{ form.email }}
+        </div>
+        <div>
+            <label for="password-field">Password</label>
+            {{ form.password1 }}
+        </div>
+        <div>
+            <label for="confirm-password-field">Confirm Password</label>
+            {{ form.password2 }}
+        </div>
+        <div>
+            <button type="submit" class="btn-signup">sign up</button>
+        </div>
     </div>
+</form>
+{% else %}
+<h1 style="text-align: center">{{ user.first_name }},<br> you are already logged in <br> Go to <a href={% url '/' %}>home</a></h1>
+{% endif %}
 {% endblock section %}

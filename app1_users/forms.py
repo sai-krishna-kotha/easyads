@@ -7,14 +7,19 @@ class UserSignUpForm(UserCreationForm):
         ('customer', 'Customer'),
         ('seller', 'Seller'),
     )
-    first_name = forms.CharField(max_length=150, required=True, label='First Name')
-    email = forms.EmailField(required=True)
-    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, required=True, label='Sign up as')
+    first_name = forms.CharField(max_length=150, required=True, label='First Name',widget=forms.TextInput(attrs={'class': 'inut-signup', 'placeholder': 'First Name'}))
+    email = forms.EmailField(required=True,widget=forms.EmailInput(attrs={'class': 'input-signup', 'placeholder': 'Email'}))
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, required=True, label='Sign up as',widget=forms.Select(attrs={'class': 'input-signup'}))
 
     class Meta:
         model = User
         fields = ('email', 'first_name', 'user_type', 'password1', 'password2')
 
+    def __init__(self, *args, **kwargs):
+        super(UserSignUpForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].widget.attrs.update({'class': 'input-signup', 'placeholder': 'Password'})
+        self.fields['password2'].widget.attrs.update({'class': 'input-signup', 'placeholder': 'Confirm Password'})
+    
     def save(self, commit=True):
         user = super().save(commit=False)
         user.user_type = self.cleaned_data['user_type']

@@ -10,6 +10,8 @@ from .models import User
 from django.contrib import messages  # for error messages
 from django.contrib.auth import logout
 
+def testing(request):
+    return render(request, 'testing.html')
 
 def signup(request):
     if request.method == 'POST':
@@ -18,7 +20,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Account created successfully. You can now log in.")
-            return redirect('user_login')  # Use the name of your login URL
+            return redirect('signin')  # Use the name of your signin URL
         else:
             # Add form errors to messages
             print(form.errors.items())
@@ -32,7 +34,7 @@ def signup(request):
     return render(request, 'app1_users/signup.html', {'form': form})
 
 
-def user_login(request):
+def signin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         print(form.is_valid())
@@ -58,18 +60,18 @@ def user_login(request):
                 for error in errors:
                     messages.error(request, f"{field}: {error}")
 
-        # After handling POST errors, redirect to GET login page
-        return redirect('user_login')  # change 'login' to your login url name
+        # After handling POST errors, redirect to GET signin page
+        return redirect('signin')  # change 'signin' to your signin url name
 
     else:
         form = LoginForm()
 
-    return render(request, 'app1_users/login.html', {'form': form})
+    return render(request, 'app1_users/signin.html', {'form': form})
 
 
-def user_logout(request):
+def signout(request):
     logout(request)
-    return redirect('user_login')  # or 'user_login' if you prefer
+    return redirect('signin')  # or 'signin' if you prefer
 
 
 def home(request):
@@ -89,7 +91,7 @@ def home(request):
     return render(request, "home.html", context)
     # return render(request, 'home.html')
 
-def reset_pass(request):
+def reset_password(request):
     return render(request, "app1_users/reset-pass.html")
 
 def filter_fields(request):

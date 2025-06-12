@@ -7,74 +7,233 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         {% block title %}
-
         {% endblock title %}
     </title>
-    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> {% endcomment %}
-    {% block links %}
     
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> {% endcomment %}
+    
+    <style>
+        /* Navbar Base Styles */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin-right: 1rem;
+        }
+        .search-section {
+            max-width: 400px;
+        }
+        .btn-auth {
+            margin-left: 0.25rem;
+            font-weight: 500;
+        }
+        
+        /* Enhanced Sticky Navbar with Animation */
+        .navbar {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid transparent;
+        }
+        
+        .navbar.sticky-top {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1030;
+        }
+        
+        /* Scroll animation class */
+        .navbar.scrolled {
+            transform: translateY(0);
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Body padding to prevent content overlap */
+        body {
+            padding-top: 63px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .navbar-nav {
+                margin: 1rem 0;
+            }
+            .search-section {
+                margin: 1rem 0;
+                max-width: 100%;
+            }
+            /*body {
+                padding-top: 63px;
+            }*/
+        }
+        
+        @media (max-width: 768px) {
+            /*body {
+                padding-top: 63px;
+            }*/
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding-top: 57px;
+            }
+            .search-section select {
+                max-width: 90px !important;
+            }
+            .search-section .input-group {
+                max-width: 150px !important;
+            }
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+    
+    {% block links %}
     {% endblock links %}
-    <link rel="stylesheet" href='{% static "css/base.css" %}'>
+    {% comment %} <link rel="stylesheet" href='{% static "css/base.css" %}'> {% endcomment %}
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <div class="nav1">
-                <img src='{% static "images/logo-icon.svg" %}' alt="Logo" class="logo">
-                <a href='{% url "home" %}' class="link-base"><span class="title">EasyAd</span></a>
-            </div>
-            <div class="nav2">
-                <div>
-                    <a href="" class="link-base">Home</a>
+        <nav class="navbar navbar-expand-xl navbar-light bg-white shadow-sm sticky-top">
+            <div class="container-fluid px-3">
+                <!-- Logo & Title Component -->
+                <div class="navbar-brand d-flex align-items-center me-4">
+                    <i class="fas fa-shopping-bag text-primary me-2" style="font-size: 1.8rem;"></i>
+                    <span class="text-dark">ShopEasy</span>
                 </div>
-                <div>
-                    <a href="" class="link-base">About</a>
-                </div>
-                <div>
-                    <a href="" class="link-base">Contact</a>
-                </div>
-                <div>
-                    <a href="" class="link-base">Coupons and Offers</a>
-                </div>
-            </div>
-            <div class="nav3">
-                <div>
-                    <select name="category" id="category" class="nav-field category-wrap-text">
-                        <option value="">Category</option>
-                        {% block select_category %}
-                        
-                        {% endblock select_category %}
-                        
-                    </select>
-                </div>
-                <div>
-                    <select name="city" id="city" class="nav-field city-wrap-text">
-                        <option value="">City</option>
-                        {% block select_city %}
-                        
-                        {% endblock select_city %}
-                    </select>
-                </div>
-                <div>
-                    <input type="text" placeholder="Search keywords" class="search-field"></li>
-                </div>
-                <div>
-                    <button class="search-btn btn">Search</button>
-                </div>
-            </div>
-            <div class="nav4">
-                <div>
-                    <a href='{% url "user_login" %}' class="link-base"><button class="login-btn btn">Login</button></a>
-                </div>
-                <div>
-                    <a href='{% url "signup" %}' class="link-base"><button class="signup-btn btn">Signup</button></a>
+    
+                <!-- Mobile Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Navigation Links Component -->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary fw-bold" href="#">Coupons & Offers</a>
+                        </li>
+                    </ul>
+    
+                    <!-- Search & Filters Component -->
+                    <div class="search-section d-flex align-items-center me-3">
+                        <form method="GET" action="#" class="d-flex align-items-center">
+                            <select name="category" class="form-select form-select-sm me-2" style="max-width: 120px;">
+                                <option value="">Category</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="home">Home</option>
+                            </select>
+                            <select name="city" class="form-select form-select-sm me-2" style="max-width: 100px;">
+                                <option value="">City</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="bangalore">Bangalore</option>
+                            </select>
+                            <div class="input-group" style="max-width: 200px;">
+                                <input type="search" name="q" class="form-control form-control-sm" placeholder="Search..." value="{{ request.GET.q }}">
+                                <button class="btn btn-primary btn-sm" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+    
+                    <!-- Auth Buttons Component -->
+                    <div class="d-flex align-items-center">
+                        {% if user.is_authenticated %}
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    Welcome, {{ user.first_name|truncatechars:10 }}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">My Orders</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href='{% url "signout" %}'>signout</a></li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <a href='{% url "signin" %}' class="btn btn-outline-primary btn-sm btn-auth">signin</a>
+                            <a href='{% url "signup" %}' class="btn btn-primary btn-sm btn-auth">Sign Up</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    {% block section %}
-    {% endblock section %}
+    
+    <main>
+        {% block section %}
+        {% endblock section %}
+    </main>
+    
     <footer>
+        {% block footer %}
+        {% endblock footer %}
     </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Navbar Scroll Animation Script -->
+    {% comment %} <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            let lastScrollTop = 0;
+            
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                
+                // Optional: Hide navbar on scroll down, show on scroll up
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scrolling up
+                    navbar.style.transform = 'translateY(0)';
+                //}
+                
+                lastScrollTop = scrollTop;
+            });
+        });
+    </script> {% endcomment %}
+    
+    {% block scripts %}
+    {% endblock scripts %}
 </body>
 </html>

@@ -1,0 +1,92 @@
+
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
+    
+    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> {% endcomment %}
+    {% block links %}
+    
+    {% endblock links %}
+    {% comment %} <link rel="stylesheet" href='{% static "css/base.css" %}'> {% endcomment %}
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+            <div class="container-fluid px-3">
+                <!-- Logo & Title Component -->
+                <div class="navbar-brand d-flex align-items-center me-4">
+                    <i class="fas fa-shopping-bag text-primary me-2" style="font-size: 1.8rem;"></i>
+                    <span class="text-dark">ShopEasy</span>
+                </div>
+    
+                <!-- Mobile Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Navigation Links Component -->
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary fw-bold" href="#">Coupons & Offers</a>
+                        </li>
+                    </ul>
+    
+                    <!-- Search & Filters Component -->
+                    <div class="search-section d-flex align-items-center me-3">
+                        <select class="form-select form-select-sm me-2" style="max-width: 120px;">
+                            <option>Category</option>
+                            <option>Electronics</option>
+                            <option>Fashion</option>
+                            <option>Home</option>
+                        </select>
+                        <select class="form-select form-select-sm me-2" style="max-width: 100px;">
+                            <option>City</option>
+                            <option>Mumbai</option>
+                            <option>Delhi</option>
+                            <option>Bangalore</option>
+                        </select>
+                        <div class="input-group" style="max-width: 200px;">
+                            <input type="search" class="form-control form-control-sm" placeholder="Search...">
+                            <button class="btn btn-primary btn-sm" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+    
+                    <!-- Auth Buttons Component -->
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-outline-primary btn-sm btn-auth">Login</button>
+                        <button class="btn btn-primary btn-sm btn-auth">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% block section %}
+    {% endblock section %}
+    <footer>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

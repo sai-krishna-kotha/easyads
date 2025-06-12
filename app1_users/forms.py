@@ -7,13 +7,13 @@ class UserSignUpForm(UserCreationForm):
         ('customer', 'Customer'),
         ('seller', 'Seller'),
     )
-    first_name = forms.CharField(max_length=150, required=True, label='First Name',widget=forms.TextInput(attrs={'class': 'inut-signup', 'placeholder': 'First Name'}))
-    email = forms.EmailField(required=True,widget=forms.EmailInput(attrs={'class': 'input-signup', 'placeholder': 'Email'}))
-    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, required=True, label='Sign up as',widget=forms.Select(attrs={'class': 'input-signup'}))
+    first_name = forms.CharField(max_length=150, required=True, label='First Name',widget=forms.TextInput(attrs={'class': 'input-signup form-control', 'placeholder': 'Full Name', 'autofocus': True}))
+    email = forms.EmailField(required=True,widget=forms.EmailInput(attrs={'class': 'input-signup form-control', 'placeholder': 'Email'}))
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, required=True, label='Sign up as',widget=forms.Select(attrs={'class': 'select-signup form-select'}))
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'user_type', 'password1', 'password2')
+        fields = ( 'first_name', 'email', 'user_type', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super(UserSignUpForm, self).__init__(*args, **kwargs)
@@ -33,10 +33,10 @@ class UserSignUpForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email', required=True ,widget=forms.EmailInput(attrs={'id':'email-field', 'class':'input'}))
-    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'id':'password-field', 'class':'input'}))
+    email = forms.EmailField(label='Email', required=True ,widget=forms.EmailInput(attrs={'id':'email-field', 'class':'input form-control', 'placeholder':'Email','autofocus': True}))
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'id':'password-field', 'class':'input form-control', 'placeholder':'Password'}))
     user_type = forms.ChoiceField(
         choices=[('customer', 'Customer'), ('seller', 'Seller'), ('admin', 'Admin')],
         label='Login as',
-        widget= forms.Select(attrs={'id':'user-type-field', 'class':'input'})
+        widget= forms.Select(attrs={'id':'user-type-field', 'class':'input form-control'})
     )

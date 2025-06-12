@@ -72,6 +72,11 @@
     background: #0056b3;
 }
 
+.login-btn:active,
+.signup-btn:active {
+    opacity: 0.7;
+}
+
 /* Link styles */
 .forgot-password {
     display: block;

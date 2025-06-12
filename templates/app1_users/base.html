@@ -12,10 +12,8 @@
     
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    {% comment %} <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> {% endcomment %}
     
     <style>
         /* Navbar Base Styles */
@@ -37,10 +35,9 @@
         
         /* Enhanced Sticky Navbar with Animation */
         .navbar {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
             border-bottom: 1px solid transparent;
         }
-        
         .navbar.sticky-top {
             position: fixed !important;
             top: 0;
@@ -60,7 +57,18 @@
             background-color: rgba(255, 255, 255, 0.95) !important;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
         }
-        
+        .dropdown-item{
+            transition: color 0.25s,
+            background-color 0.25s;
+        }
+        .dropdown-item:hover{
+            color: blue;
+            background-color: rgba(211, 232, 255, 0.95);
+        }
+        .dropdown-item:active{
+            color: white;
+            background-color: rgb(13, 110, 253);
+        }
         /* Body padding to prevent content overlap */
         body {
             padding-top: 63px;
@@ -109,7 +117,6 @@
     
     {% block links %}
     {% endblock links %}
-    {% comment %} <link rel="stylesheet" href='{% static "css/base.css" %}'> {% endcomment %}
 </head>
 <body>
     <header>
@@ -172,17 +179,17 @@
                         {% if user.is_authenticated %}
                             <div class="dropdown">
                                 <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                    Welcome, {{ user.first_name|truncatechars:10 }}
+                                    Welcome, {{ user.first_name|truncatechars:10 |default:'Anonymous'}}
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Profile</a></li>
                                     <li><a class="dropdown-item" href="#">My Orders</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href='{% url "signout" %}'>signout</a></li>
+                                    <li><a class="dropdown-item" href='{% url "signout" %}'>Sign out</a></li>
                                 </ul>
                             </div>
                         {% else %}
-                            <a href='{% url "signin" %}' class="btn btn-outline-primary btn-sm btn-auth">signin</a>
+                            <a href='{% url "signin" %}' class="btn btn-outline-primary btn-sm btn-auth">Sign in</a>
                             <a href='{% url "signup" %}' class="btn btn-primary btn-sm btn-auth">Sign Up</a>
                         {% endif %}
                     </div>
@@ -195,7 +202,12 @@
         {% block section %}
         {% endblock section %}
     </main>
-    
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
     <footer>
         {% block footer %}
         {% endblock footer %}
@@ -205,33 +217,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
     <!-- Navbar Scroll Animation Script -->
-    {% comment %} <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navbar = document.querySelector('.navbar');
-            let lastScrollTop = 0;
-            
-            window.addEventListener('scroll', function() {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-                
-                // Optional: Hide navbar on scroll down, show on scroll up
-                if (scrollTop > lastScrollTop && scrollTop > 100) {
-                    // Scrolling down
-                    navbar.style.transform = 'translateY(-100%)';
-                } else {
-                    // Scrolling up
-                    navbar.style.transform = 'translateY(0)';
-                //}
-                
-                lastScrollTop = scrollTop;
-            });
-        });
-    </script> {% endcomment %}
+    <script src='{% static "js/app1_users/script.js" %}'></script>
     
     {% block scripts %}
     {% endblock scripts %}

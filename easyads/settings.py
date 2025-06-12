@@ -32,7 +32,7 @@ AUTH_USER_MODEL = 'app1_users.User'
 
 AUTHENTICATION_BACKENDS = [
     'app1_users.backends.EmailUserTypeBackend',  # adjust to your app's path
-    'django.contrib.auth.backends.ModelBackend'
+    # 'django.contrib.auth.backends.ModelBackend'
 ]
 LOGIN_REDIRECT_URL = '/'
 

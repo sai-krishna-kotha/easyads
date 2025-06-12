@@ -53,7 +53,7 @@ def signin(request):
                 else:
                     messages.error(request, "Invalid password.")
             except User.DoesNotExist:
-                messages.error(request, "User with this email does not exist.")
+                messages.error(request, "Email does not exist.")
         else:
             # If form is invalid, add form errors to messages
             for field, errors in form.errors.items():
@@ -75,6 +75,7 @@ def signout(request):
 
 
 def home(request):
+    # temporary
     category_options = {
         "books": "Books",
         "clothes": "Clothes"

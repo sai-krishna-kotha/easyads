@@ -7,9 +7,11 @@ class UserSignUpForm(UserCreationForm):
         ('customer', 'Customer'),
         ('seller', 'Seller'),
     )
-    first_name = forms.CharField(max_length=150, required=True, label='First Name',widget=forms.TextInput(attrs={'class': 'input-signup form-control', 'placeholder': 'Full Name', 'autofocus': True}))
-    email = forms.EmailField(required=True,widget=forms.EmailInput(attrs={'class': 'input-signup form-control', 'placeholder': 'Email'}))
-    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, required=True, label='Sign up as',widget=forms.Select(attrs={'class': 'select-signup form-select'}))
+    first_name = forms.CharField(max_length=150, required=True, label='First Name',widget=forms.TextInput(attrs={'class': 'form-control form-control-sm py-1', 'placeholder': 'Full Name', 'autofocus': True}))
+    
+    email = forms.EmailField(required=True,widget=forms.EmailInput(attrs={'class': 'form-control form-control-sm py-1', 'placeholder': 'Email'}))
+    
+    user_type = forms.ChoiceField(choices=USER_TYPE_CHOICES, required=True, label='Sign up as',widget=forms.Select(attrs={'class': 'form-select form-select-sm py-1'}))
 
     class Meta:
         model = User
@@ -17,8 +19,9 @@ class UserSignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserSignUpForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].widget.attrs.update({'class': 'input-signup', 'placeholder': 'Password'})
-        self.fields['password2'].widget.attrs.update({'class': 'input-signup', 'placeholder': 'Confirm Password'})
+        self.fields['password1'].widget.attrs.update({'class': 'form-control form-control-sm py-1', 'placeholder': 'Password'})
+        
+        self.fields['password2'].widget.attrs.update({'class': 'form-control form-control-sm py-1', 'placeholder': 'Confirm Password'})
     
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -33,10 +36,12 @@ class UserSignUpForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email', required=True ,widget=forms.EmailInput(attrs={'id':'email-field', 'class':'input form-control', 'placeholder':'Email','autofocus': True}))
-    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'id':'password-field', 'class':'input form-control', 'placeholder':'Password'}))
+    email = forms.EmailField(label='Email', required=True ,widget=forms.EmailInput(attrs={'id':'email-field', 'class':'form-control form-control-sm py-1', 'placeholder':'Email','autofocus': True}))
+    
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'id':'password-field', 'class':'form-control form-control-sm py-1', 'placeholder':'Password'}))
+    
     user_type = forms.ChoiceField(
         choices=[('customer', 'Customer'), ('seller', 'Seller'), ('admin', 'Admin')],
         label='Login as',
-        widget= forms.Select(attrs={'id':'user-type-field', 'class':'input form-control'})
+        widget= forms.Select(attrs={'id':'user-type-field', 'class':'form-select form-select-sm py-1'})
     )

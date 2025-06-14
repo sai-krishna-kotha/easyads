@@ -19,7 +19,7 @@ def create_ad(request):
             return redirect('my_ads')  # Redirect to seller dashboard
     else:
         form = AdForm()
-    return render(request, 'app2_ads/create-ad.html', {'form': form})
+    return render(request, 'app2_ads/seller1.html', {'form': form})
 
 def browse_ads(request):
     ads = Ad.objects.filter(status='APPROVED')

@@ -178,12 +178,15 @@
                     <div class="d-flex align-items-center">
                         {% if user.is_authenticated %}
                             <div class="dropdown">
-                                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                    Welcome, {{ user.first_name|truncatechars:10 |default:'Anonymous'}}
+                                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">Account
+                                    {% comment %} Hii, {{ user.first_name|truncatechars:10 |default:'Anonymous'}} {% endcomment %}
                                 </button>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="#">Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">My Orders</a></li>
+                                    {% if user.user_type == 'seller' %}
+                                    <li><a class="dropdown-item" href=''>Dashboard</a></li>
+                                    {% else %}
+                                    {% endif %}
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href='{% url "signout" %}'>Sign out</a></li>
                                 </ul>

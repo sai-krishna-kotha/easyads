@@ -1,30 +1,16 @@
-{% extends "app1_users/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}
 Home - EasyAd
 {% endblock title %}
 
-{% block select_category %}
-{% for value, label in category_options.items %}
-    <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>
-        {{ label }}
-    </option>
-    {% endfor %} 
-{% endblock select_category %}
-
-{% block select_city %}
-{% for value, label in city_options.items %}
-    <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>
-        {{ label }}
-    </option>
-    {% endfor %} 
-{% endblock select_city %}
 
 
 
-{% block section %}
+
+{% block content %}
 <h1>Hi {{user.first_name}}</h1>
 
-{% endblock section %}
+{% endblock content %}
 

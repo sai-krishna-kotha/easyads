@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', # look for app static files by default
 
     'app1_users',
     'app2_ads',
@@ -69,8 +69,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
+        'DIRS': [TEMPLATE_DIR],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -134,6 +134,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

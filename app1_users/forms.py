@@ -4,6 +4,7 @@ from .models import User
 
 class UserSignUpForm(UserCreationForm):
     USER_TYPE_CHOICES = (
+        ('', '----------'),
         ('customer', 'Customer'),
         ('seller', 'Seller'),
     )
@@ -41,7 +42,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'id':'password-field', 'class':'form-control form-control-sm py-1', 'placeholder':'Password'}))
     
     user_type = forms.ChoiceField(
-        choices=[('customer', 'Customer'), ('seller', 'Seller'), ('admin', 'Admin')],
+        choices=[('', '----------'),('customer', 'Customer'), ('seller', 'Seller'), ('admin', 'Admin')],
         label='Login as',
         widget= forms.Select(attrs={'id':'user-type-field', 'class':'form-select form-select-sm py-1'})
     )

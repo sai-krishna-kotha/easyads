@@ -1,25 +1,21 @@
-{% extends "app1_users/base.html" %}
+{% extends "app1_users/layer.html" %}
 
 {% load static %}
 
 {% block title %}
-Signup - EasyAd
-{% endblock %}
+Login - EasyAds
+{% endblock title%}
 
-{% block links %}
-<link rel="stylesheet" href='{% static "css/app1_users/styles.css" %}'>
-<link rel="stylesheet" href='{% static "base-nav-footer.css" %}'>
-{% endblock links %}
+{% block extra_links %}
+<link rel="stylesheet" href='{% static "app1_users/css/style.css" %}'>
 
-{% block section %}
+{% endblock extra_links %}
+
+{% block content %}
 {% if not user.is_authenticated %}
-<div class="signup-container">
-  <h2 class="signup-header">Create New Account</h2>
-  
-  <div class="signup-link">
-    Already registered? <a href="{% url 'signin' %}">Login</a>
-  </div>
-
+<div class="login-container">
+  <h2 class="login-header">Login</h2>
+  <div class="login-subtitle">Sign in to continue</div>
   
   {% if messages %}
   <ul class="messages">
@@ -33,31 +29,29 @@ Signup - EasyAd
     {% csrf_token %}
     
     <div class="form-group">
-      <label for="{{ form.first_name.id_for_label }}" class="small">Full Name</label>
-      {{ form.first_name }}
-    </div>
-    
-    <div class="form-group">
       <label for="{{ form.email.id_for_label }}" class="small">Email</label>
       {{ form.email }}
     </div>
     
     <div class="form-group">
-      <label for="{{ form.user_type.id_for_label }}" class="small">Register as</label>
+      <label for="{{ form.password.id_for_label }}" class="small">Password</label>
+      {{ form.password }}
+    </div>
+    
+    <div class="form-group">
+      <label for="{{ form.user_type.id_for_label }}" class="small">Role</label>
       {{ form.user_type }}
     </div>
     
-    <div class="form-group">
-      <label for="{{ form.password1.id_for_label }}" class="small">Password</label>
-      {{ form.password1 }}
-    </div>
+    <span class="forgot-password">
+      <a href="{% url 'reset_password' %}">Forgot Password?</a>
+    </span>
     
-    <div class="form-group">
-      <label for="{{ form.password2.id_for_label }}" class="small">Confirm Password</label>
-      {{ form.password2 }}
-    </div>
+    <button type="submit" class="login-btn">Login</button>
     
-    <button type="submit" class="signup-btn">Sign Up</button>
+    <div class="signup-link">
+      Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+    </div>
   </form>
 </div>
 {% else %}
@@ -68,7 +62,7 @@ Signup - EasyAd
     <p style="color: #666; margin-bottom: 0;">Hey {{ user.first_name|default:user.username }}, you're already signed in</p>
   </div>
   
-  <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; text-align: center;">
+  <div style="background:rgb(220, 237, 255); padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem; text-align: center;">
     <small style="color: #666;">Logged in as: <strong>{{ user.email|default:user.username }}</strong></small>
   </div>
   
@@ -81,4 +75,4 @@ Signup - EasyAd
   </div>
 </div>
 {% endif %}
-{% endblock %}
+{% endblock content %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    
+    <link rel="stylesheet" href='{% static "css/navbar.css" %}'>
+    {% block extra_links %}
+    
+    {% endblock extra_links %}
+</head>
+<body>
+    <header>
+        {% block navbar_section %}
+            {% include "navbar.html" %}
+        {% endblock navbar_section %}
+    </header>
+
+    <main class="">
+        {% block content %}
+
+        {% endblock content %}
+    </main>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    {% block extra_scripts %}
+    
+    {% endblock extra_scripts %}
+</body>
+</html>

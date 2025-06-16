@@ -1,0 +1,80 @@
+
+<nav class="navbar navbar-expand-xl navbar-light bg-white shadow-sm sticky-top">
+    <div class="container-fluid px-3">
+        <!-- Logo & Title Component -->
+        <div class="navbar-brand d-flex align-items-center me-4">
+            <i class="fas fa-shopping-bag text-primary me-2" style="font-size: 1.8rem;"></i>
+            <span class="text-dark">EasyAds</span>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Navigation Links Component -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary fw-bold" href="#">Coupons & Offers</a>
+                </li>
+            </ul>
+
+            <!-- Search & Filters Component -->
+            <div class="search-section d-flex align-items-center me-3">
+                <form method="GET" action="#" class="d-flex align-items-center">
+                    <select name="category" class="form-select form-select-sm me-2" style="max-width: 120px;">
+                        <option value="">Category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="home">Home</option>
+                    </select>
+                    <select name="city" class="form-select form-select-sm me-2" style="max-width: 100px;">
+                        <option value="">City</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="delhi">Delhi</option>
+                        <option value="bangalore">Bangalore</option>
+                    </select>
+                    <div class="input-group" style="max-width: 200px;">
+                        <input type="search" name="q" class="form-control form-control-sm" placeholder="Search..." value="{{ request.GET.q }}">
+                        <button class="btn btn-primary btn-sm" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Auth Buttons Component -->
+            <div class="d-flex align-items-center">
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">Account
+                            {% comment %} Hii, {{ user.first_name|truncatechars:10 |default:'Anonymous'}} {% endcomment %}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            {% if user.user_type == 'seller' %}
+                            <li><a class="dropdown-item" href=''>Dashboard</a></li>
+                            {% else %}
+                            {% endif %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href='{% url "signout" %}'>Sign out</a></li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a href='{% url "signin" %}' class="btn btn-outline-primary btn-sm btn-auth">Login</a>
+                    <a href='{% url "signup" %}' class="btn btn-primary btn-sm btn-auth">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import Ad, Seller
 from .forms import AdForm  # You’ll create this next
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+@login_required
+def dashboard(request):
+    if request.user.user_type == 'seller':
+        return HttpResponse("I am in seller dashboard")
+    elif request.user.user_type == 'customer':
+        return HttpResponse("I am in customer dashboard")
 @login_required
 def create_ad(request):
     print("I am running")

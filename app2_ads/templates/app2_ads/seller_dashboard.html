@@ -1,0 +1,21 @@
+{% extends "app2_ads/layer.html" %}
+{% block title %}
+Dashboard
+{% endblock title %}
+
+{% block content %}
+
+{% if sellerVerified %}
+    <h1>Verified</h1>
+{% else %}
+    <h1>Not verified</h1>
+    <p>
+        so <a href="{% url 'seller_registration' %}">Click Here</a> and register your details to list your ads in this site 
+    </p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Submit</button>
+    </form>
+{% endif %}
+{% endblock content %}

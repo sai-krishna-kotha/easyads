@@ -1,15 +1,32 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Ad, Seller
-from .forms import AdForm  # You’ll create this next
+from .forms import AdForm, SellerForm  # You’ll create this next
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 @login_required
-def dashboard(request):
-    if request.user.user_type == 'seller':
-        return HttpResponse("I am in seller dashboard")
-    elif request.user.user_type == 'customer':
-        return HttpResponse("I am in customer dashboard")
+def seller_registration(request):
+    if request.method == 'POST':
+        form = SellerForm(request.POST)
+        if form.is_valid():
+            seller = form.save(commit=False)
+            seller.user = request.user
+            seller.verified = False
+            print("I am valid\n\n\n")
+            seller.save()
+            return HttpResponse("You are verified....")
+    elif request.method == 'GET':
+        form = SellerForm()
+        return render(request, 'app2_ads/seller_dashboard.html', {'form':form})
+def seller_dashboard(request):
+    try:
+        seller = Seller.objects.get(user_id=request.user)
+        return render(request, 'app2_ads/seller_dashboard.html', {'sellerVerified':True})
+    except Seller.DoesNotExist:
+        return render(request, 'app2_ads/seller_dashboard.html', {'sellerVerified':False})
+    # if request.user.user_type == 'seller':
+    #     return render(request, 'app2_ads/seller_dashboard.html')
+    
 @login_required
 def create_ad(request):
     print("I am running")

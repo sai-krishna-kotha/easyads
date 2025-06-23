@@ -75,22 +75,7 @@ def signout(request):
 
 
 def home(request):
-    # temporary
-    category_options = {
-        "books": "Books",
-        "clothes": "Clothes"
-    }
-    city_options = {
-        "newyork": "New York",
-        "london": "London"
-    }
-
-    context = {
-        "category_options": category_options,
-        "city_options": city_options
-    }
-    return render(request, "home.html", context)
-    # return render(request, 'home.html')
+    return render(request, "home.html")
 
 def reset_password(request):
     return render(request, "app1_users/reset-pass.html")

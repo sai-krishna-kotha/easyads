@@ -23,7 +23,7 @@ urlpatterns = [
     path('', home, name='home'),  # Common home
     path('users/', include('app1_users.urls')),
     path('testing/', testing, name='testing'),
-    path('ads', include('app2_ads.urls')),
+    path('ads/', include('app2_ads.urls')),
 
 
 ]

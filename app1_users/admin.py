@@ -1,11 +1,11 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from unfold.admin import ModelAdmin as UnfoldModelAdmin
+# from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+# from unfold.admin import ModelAdmin as UnfoldModelAdmin
 from .models import User    
-from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
 
 @admin.register(User)
-class UserAdmin(UnfoldModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     # fieldsets = (
     #     (None, {'fields': ('email', 'password')}),
     #     (_('Personal info'), {'fields': ('first_name',)}),
@@ -23,7 +23,7 @@ class UserAdmin(UnfoldModelAdmin):
     # )
     list_display = ('email', 'first_name', 'user_type', 'is_staff')
     search_fields = ('email', 'first_name', 'user_type')
-    ordering = ('email',)
+    ordering = ('date_joined',)
 
     # Tell Django to use email as the login field
     filter_horizontal = ('groups', 'user_permissions')

@@ -26,7 +26,7 @@ def signup(request):
             print(form.errors.items())
             for field, errors in form.errors.items():
                 for error in errors:
-                    messages.error(request, f"{field}: {error}")
+                    messages.error(request, f"{error}")
             return redirect('signup')  # Use the name of your signup URL
     else:
         form = UserSignUpForm()

@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 
+app_name = 'app2_ads'
+
+
 urlpatterns = [
     path('post/', views.create_ad, name='create_ad'),
     # path('temp/', views.create_ad, name='create_ad'),

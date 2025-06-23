@@ -11,6 +11,9 @@ Home - EasyAd
 
 {% block content %}
 <h1>Hi {{user.first_name}}</h1>
-
+{% if user.user_type == "admin" %}
+    go to <a href="{% url 'admin:index' %}">Admin panel</a>
+{% else %}
+{% endif %}
 {% endblock content %}
 

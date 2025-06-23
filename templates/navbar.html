@@ -65,7 +65,7 @@
                             {% if user.user_type == 'seller' %}
                             <li><a class="dropdown-item" href='{% url "seller_dashboard" %}'>Dashboard</a></li>
                             {% elif user.user_type == 'customer' %}
-                            <li><a class="dropdown-item" href='{% url "customer_dashboard" %}'>Dashboard</a></li>
+                            {% comment %} <li><a class="dropdown-item" href='{% url "customer_dashboard" %}'>Dashboard</a></li> {% endcomment %}
                             {% endif %}
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href='{% url "signout" %}'>Sign out</a></li>

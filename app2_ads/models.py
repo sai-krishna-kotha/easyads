@@ -1,10 +1,12 @@
 from django import forms
 from django.db import models
 from app1_users.models import User  # Assuming Seller is linked via User
+from django.utils.text import slugify
+
 # Create your models here.
 
 class Seller(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='seller')
     business_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
     address = models.TextField(blank=True,max_length=200)
@@ -15,7 +17,10 @@ class Seller(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True)
-
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
     def __str__(self):
         return self.name
 
@@ -26,13 +31,13 @@ class Ad(models.Model):
         ('REJECTED', 'Rejected'),
     ]
 
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='ads')
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='ads/')
+    # image = models.ImageField(upload_to='ads/',blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

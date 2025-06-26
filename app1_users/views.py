@@ -74,9 +74,6 @@ def signout(request):
     return redirect('signin')  # or 'signin' if you prefer
 
 
-def home(request):
-    return render(request, "home.html")
-
 def reset_password(request):
     return render(request, "app1_users/reset-pass.html")
 

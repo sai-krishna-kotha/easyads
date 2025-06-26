@@ -1,1 +1,58 @@
 {% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{user.user_type}} dashboard
+{% endblock title %}
+
+{% block extra_links %}
+<link rel="stylesheet" href="{% static 'app2_ads/css/seller-dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'app2_ads/css/seller-registration.css' %}">
+{% endblock extra_links %}
+
+{% block side_bar %}
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <div class="px-3 py-3 border-bottom">
+        <h6 class="text-muted mb-0 fw-bold">{{user.user_type|upper}} DASHBOARD</h6>
+    </div>
+    <nav class="nav flex-column p-3">
+        <a class="nav-link active" href="#">
+            <i class="fas fa-tachometer-alt me-2"></i>Overview
+        </a>
+        {% comment %} <a class="nav-link" href="#">
+            <i class="fas fa-plus-circle me-2 text-success"></i>Add New Ad
+        </a> {% endcomment %}
+        {% comment %} <a class="nav-link" href="#">
+            <i class="fas fa-list me-2 text-info"></i>My Ads
+        </a> {% endcomment %}
+        {% comment %} <a class="nav-link" href="#">
+            <i class="fas fa-chart-line me-2 text-warning"></i>Analytics
+        </a> {% endcomment %}
+        {% comment %} <a class="nav-link" href="#">
+            <i class="fas fa-star me-2 text-warning"></i>Reviews
+        </a> {% endcomment %}
+        {% comment %} <a class="nav-link" href="#">
+            <i class="fas fa-envelope me-2 text-primary"></i>Messages
+        </a> {% endcomment %}
+        {% comment %} <a class="nav-link" href="#">
+            <i class="fas fa-credit-card me-2 text-success"></i>Payments
+        </a> {% endcomment %}
+        <a class="nav-link" href="#">
+            <i class="fas fa-cog me-2 text-secondary"></i>Settings
+        </a>
+    </nav>
+</div>
+
+
+
+{% endblock side_bar %}
+
+
+{% block content %}
+
+{% endblock content %}
+
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}

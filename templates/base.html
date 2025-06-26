@@ -14,21 +14,24 @@
     
     <link rel="stylesheet" href='{% static "css/navbar.css" %}'>
     {% block extra_links %}
-    
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     {% endblock extra_links %}
 </head>
 <body>
     <header>
-            {% include "navbar.html" %}
+        {% include "navbar.html" %}
     </header>
+    
+    {% block side_bar %}
+    
+    {% endblock side_bar %}
 
-    <main class="">
-        {% block content %}
+    {% block content %}
 
-        {% endblock content %}
-    </main>
+    {% endblock content %}
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
+    {% include "footer.html" %}
     {% block extra_scripts %}
     
     {% endblock extra_scripts %}

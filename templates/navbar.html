@@ -27,11 +27,16 @@
                 <li class="nav-item">
                     <a class="nav-link text-primary fw-bold" href="#">Coupons & Offers</a>
                 </li>
+                {% if user.user_type == 'admin' %}
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-bold" href="{% url 'admin:index' %}">Admin panel</a>
+                </li>
+                {% endif %}
             </ul>
 
             <!-- Search & Filters Component -->
             <div class="search-section d-flex align-items-center me-3">
-                <form method="GET" action="#" class="d-flex align-items-center">
+                <form method="GET" action="{% url 'home' %}" class="d-flex align-items-center">
                     <select name="category" class="form-select form-select-sm me-2" style="max-width: 120px;">
                         <option value="">Category</option>
                         <option value="electronics">Electronics</option>
@@ -61,19 +66,21 @@
                             {% comment %} Hii, {{ user.first_name|truncatechars:10 |default:'Anonymous'}} {% endcomment %}
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href=''>Profile</a></li>
+                            <li><a class="dropdown-item" href='{% if user.user_type == "seller" %} {% url "app2_ads:seller_profile" user.seller.pk %} 
+                            {% else %}
+                            {% endif %}'>Profile</a></li>
                             {% if user.user_type == 'seller' %}
-                            <li><a class="dropdown-item" href='{% url "seller_dashboard" %}'>Dashboard</a></li>
+                            <li><a class="dropdown-item" href='{% url "app2_ads:seller_dashboard" %}'>Dashboard</a></li>
                             {% elif user.user_type == 'customer' %}
-                            {% comment %} <li><a class="dropdown-item" href='{% url "customer_dashboard" %}'>Dashboard</a></li> {% endcomment %}
+                            <li><a class="dropdown-item" href='{% url "app2_ads:customer_dashboard" %}'>Dashboard</a></li>
                             {% endif %}
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href='{% url "signout" %}'>Sign out</a></li>
+                            <li><a class="dropdown-item" href='{% url "app1_users:signout" %}'>Sign out</a></li>
                         </ul>
                     </div>
                 {% else %}
-                    <a href='{% url "signin" %}' class="btn btn-outline-primary btn-sm btn-auth">Login</a>
-                    <a href='{% url "signup" %}' class="btn btn-primary btn-sm btn-auth">Register</a>
+                    <a href='{% url "app1_users:signin" %}' class="btn btn-outline-primary btn-sm btn-auth">Login</a>
+                    <a href='{% url "app1_users:signup" %}' class="btn btn-primary btn-sm btn-auth">Register</a>
                 {% endif %}
             </div>
         </div>

@@ -5,15 +5,206 @@
 Home - EasyAd
 {% endblock title %}
 
-
-
-
-
 {% block content %}
-<h1>Hi {{user.first_name}}</h1>
-{% if user.user_type == "admin" %}
-    go to <a href="{% url 'admin:index' %}">Admin panel</a>
-{% else %}
-{% endif %}
-{% endblock content %}
+<!-- Hero Section -->
+<div class="bg-primary text-white py-5 mb-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">Find Everything You Need</h1>
+                <p class="lead mb-4">Buy and sell anything in your local area with EasyAd - India's trusted classified marketplace</p>
+                <a href="" class="btn btn-warning btn-lg">
+                    <i class="bi bi-plus-circle me-2"></i>Post Free Ad
+                </a>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="bi bi-shop display-1"></i>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Quick Categories -->
+<div class="container mb-5">
+    <h3 class="mb-4">Browse Categories</h3>
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+            <a href="#" class="text-decoration-none">
+                <div class="card text-center h-100 border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <i class="bi bi-car-front text-primary mb-2" style="font-size: 2rem;"></i>
+                        <h6 class="card-title mb-0">Vehicles</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+            <a href="#" class="text-decoration-none">
+                <div class="card text-center h-100 border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <i class="bi bi-laptop text-primary mb-2" style="font-size: 2rem;"></i>
+                        <h6 class="card-title mb-0">Electronics</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+            <a href="#" class="text-decoration-none">
+                <div class="card text-center h-100 border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <i class="bi bi-house text-primary mb-2" style="font-size: 2rem;"></i>
+                        <h6 class="card-title mb-0">Real Estate</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+            <a href="#" class="text-decoration-none">
+                <div class="card text-center h-100 border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <i class="bi bi-briefcase text-primary mb-2" style="font-size: 2rem;"></i>
+                        <h6 class="card-title mb-0">Jobs</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+            <a href="#" class="text-decoration-none">
+                <div class="card text-center h-100 border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <i class="bi bi-person-workspace text-primary mb-2" style="font-size: 2rem;"></i>
+                        <h6 class="card-title mb-0">Services</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
+            <a href="#" class="text-decoration-none">
+                <div class="card text-center h-100 border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <i class="bi bi-grid-3x3-gap text-primary mb-2" style="font-size: 2rem;"></i>
+                        <h6 class="card-title mb-0">All Categories</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Listings Section -->
+<div class="container mt-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Latest Ads</h2>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  Sort by:
+                  <span>
+                    {% if sort_option == 'newest' %}Newest First
+                    {% elif sort_option == 'oldest' %}Oldest First
+                    {% elif sort_option == 'price-low' %}Price: Low to High
+                    {% elif sort_option == 'price-high' %}Price: High to Low
+                    {% else %}Select
+                    {% endif %}
+                  </span>
+                </button>
+              
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" href="?sort=newest">Newest First</a></li>
+                  <li><a class="dropdown-item" href="?sort=oldest">Oldest First</a></li>
+                  <li><a class="dropdown-item" href="?sort=price-low">Price: Low to High</a></li>
+                  <li><a class="dropdown-item" href="?sort=price-high">Price: High to Low</a></li>
+                </ul>
+              </div>              
+        </div>
+
+        <div class="row" id="adsContainer">
+            {% for ad in ads %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card ad-card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <a href="{% url 'app2_ads:ad_detail' ad.pk %}" class="text-decoration-none">
+                            <h6 class="card-title text-dark">{{ad.title}}</h6>
+                        </a>
+                        <p class="card-text flex-grow-1 text-muted">{{ad.description|truncatechars:45}}</p>
+                        <div class="mt-auto">
+                            <div class="h5 text-success mb-2">₹{{ad.price}}</div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="location text-muted">
+                                    <i class="bi bi-geo-alt me-1"></i>{{ad.location}}
+                                </div>
+                            </div>
+                            <small class="text-muted">{{ad.created_at|timesince}} ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Why Choose Us Section -->
+<div class="bg-light py-5 mt-5">
+    <div class="container">
+        <h3 class="text-center mb-5">Why Choose EasyAd?</h3>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="bi bi-shield-check text-white" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <h5>Safe & Secure</h5>
+                    <p class="text-muted">All listings are verified and monitored for your safety and security.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="bi bi-currency-rupee text-white" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <h5>Free to Use</h5>
+                    <p class="text-muted">Post unlimited ads for free. No hidden charges or subscription fees.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center">
+                    <div class="bg-warning rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 70px; height: 70px;">
+                        <i class="bi bi-people text-white" style="font-size: 1.5rem;"></i>
+                    </div>
+                    <h5>Local Community</h5>
+                    <p class="text-muted">Connect with buyers and sellers in your local area easily.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="container py-5">
+    <div class="row text-center">
+        <div class="col-md-3 mb-4">
+            <h2 class="text-primary fw-bold">10K+</h2>
+            <p class="text-muted">Active Listings</p>
+        </div>
+        <div class="col-md-3 mb-4">
+            <h2 class="text-success fw-bold">5K+</h2>
+            <p class="text-muted">Happy Users</p>
+        </div>
+        <div class="col-md-3 mb-4">
+            <h2 class="text-warning fw-bold">50+</h2>
+            <p class="text-muted">Cities Covered</p>
+        </div>
+        <div class="col-md-3 mb-4">
+            <h2 class="text-info fw-bold">24/7</h2>
+            <p class="text-muted">Customer Support</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

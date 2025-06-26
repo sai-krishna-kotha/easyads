@@ -1,0 +1,37 @@
+body {
+    padding-top: 63px; /* Account for fixed navbar */
+    background-color: #f8f9fa;
+}
+
+.ad-card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ad-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.ad-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+.price {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.location {
+    color: #6c757d;
+    font-size: 0.9em;
+}
+
+.search-section {
+    background: white;
+    border-radius: 10px;
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+}
+

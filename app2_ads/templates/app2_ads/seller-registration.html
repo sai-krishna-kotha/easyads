@@ -1,0 +1,47 @@
+{% extends "home.html" %}
+{% load static %}
+{% load form_tags %}
+
+{% block title %}
+Seller Registration
+{% endblock title %}
+
+{% block extra_links %}
+<link rel="stylesheet" href="{% static 'app2_ads/css/form.css' %}">
+{% endblock extra_links %}
+
+{% block content %}
+
+
+<div class="form-container">
+    <h2 class="form-header">Register your details</h2>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="message.tags">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="{% url 'app2_ads:seller_registration' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="{{ form.business_name.id_for_label }}">Business Name :</label>
+            {{form.business_name|'form-control form-control-sm py-1'}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.phone.id_for_label}}">Phone Number</label>
+            {{form.phone|'form-control form-control-sm py-1'}}
+        </div>
+        <div class="form-group">
+            <label for="{{form.address.id_for_label}}">Address</label>
+            {{form.address|'form-control form-control-sm py-1'}}
+        </div>
+    
+        <button type="submit" class="submit-btn">Submit</button>
+    </form>
+</div>
+
+
+
+{% endblock content %}
+

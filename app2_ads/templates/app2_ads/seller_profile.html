@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ seller.user.first_name }} - Seller Profile
+Seller Profile - {{ seller.user.first_name }}
 {% endblock title %}
 
 {% block content %}
@@ -93,7 +93,7 @@
                         <a href="" class="btn btn-primary text-decoration-none d-block">
                             <i class="bi bi-telephone me-2"></i>Phone
                         </a>
-                        <a href="" class="btn btn-outline-secondary text-decoration-none d-block">
+                        <a href="" class="btn btn-primary text-decoration-none d-block">
                             <i class="bi bi-share me-2"></i>Seller Profile
                         </a>
                     </div>
@@ -102,16 +102,19 @@
 
             <!-- Quick Actions Card -->
             <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Seller</h6>
+                </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
                         <a href="" class="btn btn-warning text-decoration-none d-block">
                             <i class="bi bi-share me-2"></i>Seller Profile
                         </a>
-                        {% if user.id == user.seller.user_id %}
-                        <a href="" class="btn btn-outline-secondary text-decoration-none d-block">
+                        {% if user.id != user.seller.user_id %}
+                        <a href="" class="btn btn-secondary text-decoration-none d-block">
                             <i class="bi bi-star me-2"></i>Follow Seller
                         </a>
-                        <a href="" class="btn btn-outline-danger text-decoration-none d-block">
+                        <a href="" class="btn btn-danger text-decoration-none d-block">
                             <i class="bi bi-flag me-2"></i>Report Seller
                         </a>
                         {% else %}

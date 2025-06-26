@@ -29,11 +29,12 @@
     {% block content %}
 
     {% endblock content %}
-    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-    {% include "footer.html" %}
-    {% block extra_scripts %}
     
+    {% block footer %}
+    {% include "footer.html" %}
+    {% endblock footer %}
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    {% block extra_scripts %}
     {% endblock extra_scripts %}
 </body>
 </html>

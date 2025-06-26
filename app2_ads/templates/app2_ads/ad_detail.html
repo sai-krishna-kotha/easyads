@@ -32,7 +32,7 @@
                         <h5>Ad Details</h5>
                         <div class="row">
                             <div class="col-sm-6">
-                                <p><i class="bi bi-geo-alt me-2"></i><strong>City:</strong> {{ ad.location }}</p>
+                                <p><i class="bi bi-geo-alt me-2"></i><strong>City:</strong> {{ ad.city }}</p>
                             </div>
                             <div class="col-sm-6">
                                 <p><i class="bi bi-check-circle me-2"></i><strong>Status:</strong> 
@@ -93,14 +93,14 @@
                 </div>
             </div>
         </div>
-    {% comment %} </div> {% endcomment %}
+    </div>
 
 </div>
     <!-- Navigation -->
     {% comment %} <div class="d-flex container py-4"> {% endcomment %}
 
-    <div class="row mt-4 ">
-        <div class="col-12 d-flex justify-content-between">
+    <div class="row my-5 ">
+        <div class="col-12 d-flex justify-content-around">
             <a href="{% url 'home' %}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Back to Listings
             </a>
@@ -113,5 +113,5 @@
         </div>
         
     </div>
-    {% comment %} </div> {% endcomment %}
+    </div>
 {% endblock %}

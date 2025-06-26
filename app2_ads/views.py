@@ -4,8 +4,10 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         LoginRequiredMixin, UserPassesTestMixin)
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import Ad, Seller
+from .models import Ad, Seller, Category, City
 from .forms import AdForm, SellerForm
+from django.views import View
+from django.db.models import Q
 
 class SellerRegistrationView(LoginRequiredMixin, View):
     def get(self, request):
@@ -88,23 +90,46 @@ class AdDetailView(DetailView):
 class HomePageView(View):
     def get(self, request):
         sort_option = request.GET.get('sort', 'newest')
+        category_slug = request.GET.get('category')
+        city_slug = request.GET.get('city')
+        query = request.GET.get('q', '')
+
+        ads = Ad.objects.filter(status="Approved")
+
+        if category_slug:
+            ads = ads.filter(category__slug=category_slug)
+
+        if city_slug:
+            ads = ads.filter(city__slug=city_slug)
+
+        if query:
+            ads = ads.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query)
+            )
 
         if sort_option == 'newest':
-            ads = Ad.objects.all().order_by('-created_at')
+            ads = ads.order_by('-created_at')
         elif sort_option == 'oldest':
-            ads = Ad.objects.all().order_by('created_at')
+            ads = ads.order_by('created_at')
         elif sort_option == 'price-low':
-            ads = Ad.objects.all().order_by('price')
+            ads = ads.order_by('price')
         elif sort_option == 'price-high':
-            ads = Ad.objects.all().order_by('-price')
-        else:
-            ads = Ad.objects.all()
+            ads = ads.order_by('-price')
 
-        return render(request, 'home.html', {'ads': ads, 'sort_option': sort_option})
+        categories = Category.objects.all()
+        cities = City.objects.all()
 
-from django.views.generic import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Seller, Ad
+        return render(request, 'home.html', {
+            'ads': ads,
+            'sort_option': sort_option,
+            'categories': categories,
+            'cities': cities,
+            'selected_category': category_slug,
+            'selected_city': city_slug,
+            'search_query': query
+        })
+
 
 class SellerProfileView(LoginRequiredMixin, DetailView):
     model = Seller

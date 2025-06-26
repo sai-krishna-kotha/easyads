@@ -104,15 +104,15 @@
                                 </select>
                             </div>
 
-                            <!-- Location Filter -->
+                            <!-- city Filter -->
                             <div class="mb-3">
-                                <label class="form-label">Location</label>
-                                <select name="location" class="form-select form-select-sm">
-                                    <option value="">All Locations</option>
-                                    <option value="new-york" {% if request.GET.location == 'new-york' %}selected{% endif %}>New York</option>
-                                    <option value="los-angeles" {% if request.GET.location == 'los-angeles' %}selected{% endif %}>Los Angeles</option>
-                                    <option value="chicago" {% if request.GET.location == 'chicago' %}selected{% endif %}>Chicago</option>
-                                    <option value="houston" {% if request.GET.location == 'houston' %}selected{% endif %}>Houston</option>
+                                <label class="form-label">city</label>
+                                <select name="city" class="form-select form-select-sm">
+                                    <option value="">All citys</option>
+                                    <option value="new-york" {% if request.GET.city == 'new-york' %}selected{% endif %}>New York</option>
+                                    <option value="los-angeles" {% if request.GET.city == 'los-angeles' %}selected{% endif %}>Los Angeles</option>
+                                    <option value="chicago" {% if request.GET.city == 'chicago' %}selected{% endif %}>Chicago</option>
+                                    <option value="houston" {% if request.GET.city == 'houston' %}selected{% endif %}>Houston</option>
                                 </select>
                             </div>
 
@@ -183,7 +183,7 @@
                                 <div class="mt-auto">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h5 class="text-primary mb-0">${{ ad.price }}</h5>
-                                        <small class="text-muted">{{ ad.location }}</small>
+                                        <small class="text-muted">{{ ad.city }}</small>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mt-2">
                                         <small class="text-muted">by {{ ad.seller.username }}</small>
@@ -215,10 +215,10 @@
                             <ul class="pagination justify-content-center">
                                 {% if ads.has_previous %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">&laquo; First</a>
+                                    <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.city %}&city={{ request.GET.city }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">&laquo; First</a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ ads.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">Previous</a>
+                                    <a class="page-link" href="?page={{ ads.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.city %}&city={{ request.GET.city }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">Previous</a>
                                 </li>
                                 {% endif %}
 
@@ -229,17 +229,17 @@
                                 </li>
                                 {% elif num > ads.number|add:'-3' and num < ads.number|add:'3' %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">{{ num }}</a>
+                                    <a class="page-link" href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.city %}&city={{ request.GET.city }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">{{ num }}</a>
                                 </li>
                                 {% endif %}
                                 {% endfor %}
 
                                 {% if ads.has_next %}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ ads.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">Next</a>
+                                    <a class="page-link" href="?page={{ ads.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.city %}&city={{ request.GET.city }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">Next</a>
                                 </li>
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{ ads.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">Last &raquo;</a>
+                                    <a class="page-link" href="?page={{ ads.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.city %}&city={{ request.GET.city }}{% endif %}{% if request.GET.min_price %}&min_price={{ request.GET.min_price }}{% endif %}{% if request.GET.max_price %}&max_price={{ request.GET.max_price }}{% endif %}{% if request.GET.sort %}&sort={{ request.GET.sort }}{% endif %}">Last &raquo;</a>
                                 </li>
                                 {% endif %}
                             </ul>

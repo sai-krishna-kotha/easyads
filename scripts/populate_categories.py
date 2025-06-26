@@ -33,6 +33,6 @@ for name in categories:
     slug = slugify(name)
     category, created = Category.objects.get_or_create(name=name, slug=slug)
     if created:
-        print(f"✅ Created: {name} ({slug})")
+        print(f"Added Category: {name} ({slug})")
     else:
-        print(f"⚠️ Already exists: {name} ({slug})")
+        print(f"Category already exists: {name} ({slug})")

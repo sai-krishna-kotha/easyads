@@ -1,26 +1,31 @@
 from django import forms
-from .models import Ad, Seller
+from .models import Ad, Seller,City
 from app1_users.models import User
 
 class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
-        fields = ['title', 'description', 'price', 'location','category']
+        fields = ['title', 'description', 'price', 'city','category']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder':'Enter Ad Title'}),
             'description': forms.Textarea(attrs={'placeholder':'Enter Ad Description','rows':4}),
             'price': forms.NumberInput(attrs={'placeholder':'Enter Ad price','step':'0.1'}),
-            'location': forms.TextInput(attrs={'placeholder':'Enter your city'})
+            'city': forms.TextInput(attrs={'placeholder':'Enter your city'})
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['city'].queryset = City.objects.all().order_by('name')
+
+
 class SellerForm(forms.ModelForm):
     class Meta:
         model = Seller
         exclude = ['verified', 'user']
-        # fields = ['business_name', 'phone', 'address']
+        # fields = ['business_name', 'phone', 'city']
         widgets = {
             'business_name': forms.TextInput(attrs={'placeholder':'Enter Business Name'}),
             'phone': forms.TextInput(attrs={'placeholder':'Enter phone No.'}),
-            'address': forms.TextInput(attrs={'placeholder':'Enter Address','rows':4})
+            'city': forms.TextInput(attrs={'placeholder':'Enter city'})
         }
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')

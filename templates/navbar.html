@@ -73,18 +73,22 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href='{% if user.seller %} {% url "app2_ads:seller_profile" user.seller.pk %} 
+                            {% elif user.user_type == "customer" %}
+                            {% url "app2_ads:customer_dashboard" %}
                             {% else %}
                             {% url "app2_ads:seller_registration" %}
                             {% endif %}'>Profile</a></li>
-                            {% if user.user_type == 'seller' %}
+                            {% comment %} {% if user.user_type == 'seller' %} {% endcomment %}
                             <li><a class="dropdown-item" href='{% if user.seller %}
                             {% url "app2_ads:seller_dashboard" %}
+                            {% elif user.user_type == "customer" %}
+                            {% url "app2_ads:customer_dashboard" %}
                             {% else %}
                             {% url "app2_ads:seller_registration" %}
                             {% endif %}'>Dashboard</a></li>
-                            {% elif user.user_type == 'customer' %}
-                            <li><a class="dropdown-item" href=''>Dashboard</a></li>
-                            {% endif %}
+                            {% comment %} {% elif user.user_type == 'customer' %}
+                            <li><a class="dropdown-item" href=''>Dashboard</a></li> {% endcomment %}
+                            {% comment %} {% endif %} {% endcomment %}
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href='{% url "app1_users:signout" %}'>Sign out</a></li>
                         </ul>

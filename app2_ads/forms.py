@@ -10,7 +10,6 @@ class AdForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'placeholder':'Enter Ad Title'}),
             'description': forms.Textarea(attrs={'placeholder':'Enter Ad Description','rows':4}),
             'price': forms.NumberInput(attrs={'placeholder':'Enter Ad price','step':'0.1'}),
-            'city': forms.TextInput(attrs={'placeholder':'Enter your city'})
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

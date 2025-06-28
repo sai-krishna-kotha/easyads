@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
+{% load custom_tags %}
 {{user.user_type}} dashboard
 {% endblock title %}
 
@@ -17,8 +18,13 @@
         <h6 class="text-muted mb-0 fw-bold">{{user.user_type|upper}} DASHBOARD</h6>
     </div>
     <nav class="nav flex-column p-3">
-        <a class="nav-link active" href="#">
-            <i class="fas fa-tachometer-alt me-2"></i>Overview
+        <a class="nav-link active" href="">
+            <i class="fas fa-tachometer-alt me-2"></i>
+            {% if request.path|get_currentpage_path == 'seller-dashboard' %}
+            Overview
+            {% else %}
+            Wishlist
+            {% endif %}
         </a>
         {% comment %} <a class="nav-link" href="#">
             <i class="fas fa-plus-circle me-2 text-success"></i>Add New Ad
@@ -56,3 +62,7 @@
 {% block extra_scripts %}
 
 {% endblock extra_scripts %}
+
+{% block footer %}
+
+{% endblock footer %}

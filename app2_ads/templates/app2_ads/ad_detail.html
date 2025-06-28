@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ ad.title }} - Ad Details
+Ad Details
 {% endblock title %}
 
 {% block content %}
@@ -92,7 +92,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 </div>
@@ -100,7 +99,7 @@
     {% comment %} <div class="d-flex container py-4"> {% endcomment %}
 
     <div class="row my-5 ">
-        <div class="col-12 d-flex justify-content-around">
+        <div class="col-12 d-flex justify-content-between">
             <a href="{% url 'home' %}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Back to Listings
             </a>

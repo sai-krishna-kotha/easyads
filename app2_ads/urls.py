@@ -6,7 +6,9 @@ from .views import (
     AdUpdateView,
     AdDeleteView,
     AdDetailView,
-    SellerProfileView
+    SellerProfileView,
+    CustomerDashboardView,
+    CustomerProfileView,
 )
 
 app_name = 'app2_ads'
@@ -19,5 +21,7 @@ urlpatterns = [
     path('<int:pk>/delete/', AdDeleteView.as_view(), name='delete_ad'),
     path('ads/<int:pk>/', AdDetailView.as_view(), name='ad_detail'),
     path('seller_profile/<int:pk>/',SellerProfileView.as_view() ,name='seller_profile'),
+    path('customer_dashboard',CustomerDashboardView.as_view(), name='customer_dashboard'),
+    path('customer_profile',CustomerProfileView.as_view(), name='customer_profile'),
 
 ]

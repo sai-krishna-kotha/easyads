@@ -4,7 +4,8 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         LoginRequiredMixin, UserPassesTestMixin)
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import Ad, Seller, Category, City
+from .models import Ad, Seller, Category, City, Customer
+from app1_users.models import User
 from .forms import AdForm, SellerForm
 from django.views import View
 from django.db.models import Q
@@ -151,12 +152,44 @@ class SellerProfileView(LoginRequiredMixin, DetailView):
         print(f"{context['active_ads']}\n\n\n")
         return context
 
-
-
-class BrowseAdsView(ListView):
-    model = Ad
-    template_name = 'ads/browse_ads.html'
+class CustomerDashboardView(LoginRequiredMixin, ListView):
+    model = Customer
+    template_name = 'app2_ads/customer_dashboard.html'
     context_object_name = 'ads'
 
     def get_queryset(self):
-        return Ad.objects.filter(status='APPROVED')
+        self.customer = Seller.objects.filter(user=self.request.user).first()
+        if self.customer:
+            return self.customer.wishlist.all()
+        return []
+    
+class CustomerProfileView(LoginRequiredMixin, DetailView):
+    model = Customer
+    template_name = 'app2_ads/customer_profile.html'
+    context_object_name = 'customer'
+
+    # def get_queryset(self):
+        # Restrict sellers only to those who are verified if needed
+        # return Seller.objects.filter(verified=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        customer = self.get_object()
+        # Attach ads for display
+        context['wishlist'] = customer.wishlist.all()  # all ads
+        # context['active_ads'] = seller.ads.filter(status='Pending')  # only active ads
+        for ad in context['wishlist']:
+            print(ad.title)
+        print(f"{context['wishlist']}\n\n\n")
+        return context
+
+
+def add_to_wishlist(request, ad_id):
+    ad = get_object_or_404(Ad, pk=ad_id)
+    request.user.customer.wishlist.add(ad)
+    return redirect(request.META.get('HTTP_REFERER', 'wishlist_page'))
+
+def remove_from_wishlist(request, ad_id):
+    ad = get_object_or_404(Ad, pk=ad_id)
+    request.user.customer.wishlist.remove(ad)
+    return redirect(request.META.get('HTTP_REFERER', 'wishlist_page'))

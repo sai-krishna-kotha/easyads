@@ -172,13 +172,12 @@ class SellerProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         seller = self.get_object()
         # Attach ads for display
-        context['ads'] = seller.ads.all()  # all ads
-        context['active_ads'] = seller.ads.filter(status='Pending')  # only active ads
-        for ad in context['active_ads']:
+        context['ads'] = seller.ads.filter(status='Approved')  # only active ads
+        for ad in context['ads']:
             print(ad.title)
-        print(f"{context['active_ads']}\n\n\n")
+            print(ad.seller.user)
+        print(context['ads'])
         return context
-
 class CustomerDashboardView(LoginRequiredMixin, ListView):
     model = Customer
     template_name = 'app2_ads/customer_dashboard.html'

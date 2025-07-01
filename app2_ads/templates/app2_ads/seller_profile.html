@@ -34,7 +34,7 @@ Seller Profile - {{ seller.user.first_name }}
                             <small class="text-muted">Total Ads</small>
                         </div>
                         <div class="col-4">
-                            <h4 class="text-success mb-0">{{ active_ads.count }}</h4>
+                            <h4 class="text-success mb-0">{{ ads.count }}</h4>
                             <small class="text-muted">Active Ads</small>
                         </div>
                         <div class="col-4">
@@ -49,22 +49,22 @@ Seller Profile - {{ seller.user.first_name }}
             <div class="card shadow-sm">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Active Ads</h5>
-                    <span class="badge bg-primary">{{ seller.ads.status.count }} ads</span>
+                    <a href="" class="btn btn-sm btn-outline-primary">[View all]</a>
                 </div>
                 <div class="card-body">
-                    {% if active_ads %}
+                    {% if ads %}
                         <div class="row">
-                            {% for active_ad in active_ads %}
+                            {% for ad in ads %}
                             <div class="col-md-6 mb-3">
                                 <div class="card h-100 border-0 bg-light">
                                     <div class="card-body">
-                                        <h6 class="card-title">{{ active_ad.title }}</h6>
-                                        <p class="text-muted small mb-2">{{ active_ad.category.name }}</p>
-                                        <h6 class="text-success">₹{{ active_ad.price }}</h6>
-                                        <p class="card-text small text-muted">{{ active_ad.description|truncatewords:15 }}</p>
+                                        <h6 class="card-title">{{ ad.title }}</h6>
+                                        <p class="text-muted small mb-2">{{ ad.category.name }}</p>
+                                        <h6 class="text-success">₹{{ ad.price }}</h6>
+                                        <p class="card-text small text-muted">{{ ad.description|truncatewords:15 }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-muted">{{ active_ad.city }}</small>
-                                            <a href="{% url 'app2_ads:ad_detail' active_ad.pk %}" class="btn btn-sm btn-outline-primary">View</a>
+                                            <small class="text-muted">{{ ad.city }}</small>
+                                            <a href="{% url 'app2_ads:ad_detail' ad.pk %}" class="btn btn-sm btn-outline-primary">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -90,39 +90,35 @@ Seller Profile - {{ seller.user.first_name }}
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <a href="" class="btn btn-primary text-decoration-none d-block">
-                            <i class="bi bi-telephone me-2"></i>Phone
+                        <a href="tel:+91{{seller.phone}}" class="btn btn-primary text-decoration-none d-block">
+                            <i class="bi bi-telephone me-2"></i>Make a call
                         </a>
-                        <a href="" class="btn btn-primary text-decoration-none d-block">
-                            <i class="bi bi-share me-2"></i>Seller Profile
+                        <a href="mailto:{{seller.user.email}}" class="btn btn-primary text-decoration-none d-block">
+                            <i class="bi bi-share me-2"></i>Write an Email
                         </a>
                     </div>
                 </div>
             </div>
 
             <!-- Quick Actions Card -->
+            {% if seller.user != request.user %}
             <div class="card shadow-sm mb-4">
                 <div class="card-header">
-                    <h6 class="mb-0">Seller</h6>
+                    [Actions]
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <a href="" class="btn btn-warning text-decoration-none d-block">
-                            <i class="bi bi-share me-2"></i>Seller Profile
-                        </a>
-                        {% if user.id != user.seller.user_id %}
                         <a href="" class="btn btn-secondary text-decoration-none d-block">
                             <i class="bi bi-star me-2"></i>Follow Seller
                         </a>
                         <a href="" class="btn btn-danger text-decoration-none d-block">
                             <i class="bi bi-flag me-2"></i>Report Seller
                         </a>
-                        {% else %}
-                        {% endif %}
                         
                     </div>
                 </div>
             </div>
+            {% endif %}
 
             <!-- Seller Details Card -->
             <div class="card shadow-sm mb-4">
@@ -132,15 +128,15 @@ Seller Profile - {{ seller.user.first_name }}
                 <div class="card-body">
                     <div class="mb-3">
                         <small class="text-muted">Location</small>
-                        <p class="mb-0"><i class="bi bi-geo-alt me-2"></i>{{ seller.location|default:"Not specified" }}</p>
+                        <p class="mb-0">{{ seller.city|default:"Not specified" }}</p>
                     </div>
                     <div class="mb-3">
                         <small class="text-muted">Response Time</small>
-                        <p class="mb-0"><i class="bi bi-clock me-2"></i>Usually responds within 2 hours</p>
+                        <p class="mb-0">Usually responds within 2 hours</p>
                     </div>
                     <div class="mb-0">
-                        <small class="text-muted">Last Active</small>
-                        <p class="mb-0"><i class="bi bi-activity me-2"></i>{{ seller.user.last_login|timesince }} ago</p>
+                        <small class="text-muted">Last Login</small>
+                        <p class="mb-0">{{ seller.user.last_login|timesince }} ago</p>
                     </div>
                 </div>
             </div>

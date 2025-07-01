@@ -17,7 +17,7 @@ EasyAds is a full-stack Django web application for posting and browsing classifi
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Backend: Django 5.2.3
 - Frontend: HTML5, Bootstrap
@@ -63,7 +63,7 @@ http://localhost:8000
 
 ---
 
-👤 Default User Roles
+## Default User Roles
 
 You can create users using the Django admin:
 ```bash
@@ -76,14 +76,14 @@ http://localhost:8000/admin
 
 ---
 
-## 📬 Contact Form Example
+## Contact Form Example
 
 The contact form is functional and includes backend validation. You can access it via a button or /contact/ route.
 
 
 ---
 
-## 📌 Future Improvements
+## Future Improvements
 
 - Add image upload for ads
 - Add pagination to listing pages
@@ -93,20 +93,20 @@ The contact form is functional and includes backend validation. You can access i
 
 ---
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License.
 
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Pull requests are welcome. For major changes, open an issue first to discuss what you’d like to change.
 
 
 ---
 
-## 🙋‍♂️ Author
+## Author
 
 Sai Krishna Kotha

@@ -123,7 +123,7 @@ class HomePageView(View):
         query = request.GET.get('q', '')
 
         ads = Ad.objects.filter(status="Approved")
-
+        
         if category_slug:
             ads = ads.filter(category__slug=category_slug)
 

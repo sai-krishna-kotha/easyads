@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Ad, Seller, Category, City, Customer
 from app1_users.models import User
-from .forms import AdForm, SellerForm
+from .forms import AdForm, SellerForm, ContactForm
 from django.views import View
 from django.db.models import Q
 
@@ -224,3 +224,19 @@ class RemoveFromWishlist(View):
             request.user.seller.wishlist.remove(ad)
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
+
+class AboutView(View):
+    def get(self, request):
+        return render(request, 'about.html')
+class ContactView(View):
+    def get(self, request):
+        form = ContactForm()
+        return render(request, 'contact.html', {'form': form})
+
+    def post(self, request):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # TODO: Save to DB or send email
+            messages.success(request, "Thanks! Your message has been sent.")
+            return redirect('contact')
+        return render(request, 'contact.html', {'form': form})

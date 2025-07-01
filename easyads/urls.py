@@ -18,12 +18,14 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
 from app1_users.views import signin
-from app2_ads.views import HomePageView
+from app2_ads.views import HomePageView,AboutView,ContactView
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/login/', signin,name="signin"),
     path('admin/', admin.site.urls),
     path('',HomePageView.as_view(), name='home'),
+    path('about/',AboutView.as_view(), name="about"),
+    path('contact/',ContactView.as_view(), name="contact"),
     path('users/', include('app1_users.urls')),
     path('ads/', include('app2_ads.urls')),
 ]

@@ -195,20 +195,16 @@ class CustomerProfileView(LoginRequiredMixin, DetailView):
     template_name = 'app2_ads/customer_profile.html'
     context_object_name = 'customer'
 
-    # def get_queryset(self):
-        # Restrict sellers only to those who are verified if needed
-        # return Seller.objects.filter(verified=True)
+    def get_object(self, queryset=None):
+        return self.request.user.customer  # gets customer linked to current user
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         customer = self.get_object()
-        # Attach ads for display
-        context['wishlist'] = customer.wishlist.all()  # all ads
-        # context['active_ads'] = seller.ads.filter(status='Pending')  # only active ads
-        for ad in context['wishlist']:
-            print(ad.title)
-        print(f"{context['wishlist']}\n\n\n")
+        context['wishlist'] = customer.wishlist.all()
+        print(context['wishlist'])
         return context
+
 
 class AddToWishlist(View):
     def get(self, request, pk):

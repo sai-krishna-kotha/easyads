@@ -72,14 +72,17 @@
                         {% comment %} Hii, {{ user.first_name|truncatechars:10 |default:'Anonymous'}} {% endcomment %}
                     </button>
                     <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-md-start ">
-                        <li><a class="dropdown-item" href='{% if user.seller %} {% url "app2_ads:seller_profile" user.seller.pk %} 
+                        <li><a class="dropdown-item" href='    
+                        {% if user.seller %} 
+                        {% url "app2_ads:seller_profile" user.seller.pk %} 
                         {% elif user.user_type == "customer" %}
-                        {% url "app2_ads:customer_dashboard" %}
+                        {% url "app2_ads:customer_profile" %}
                         {% else %}
                         {% url "app2_ads:seller_registration" %}
                         {% endif %}'>Profile</a></li>
                         {% comment %} {% if user.user_type == 'seller' %} {% endcomment %}
-                        <li><a class="dropdown-item" href='{% if user.seller %}
+                        <li><a class="dropdown-item" href='
+                        {% if user.seller %}
                         {% url "app2_ads:seller_dashboard" %}
                         {% elif user.user_type == "customer" %}
                         {% url "app2_ads:customer_dashboard" %}

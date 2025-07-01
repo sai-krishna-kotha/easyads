@@ -78,9 +78,11 @@ Ad Details
             <div class="card shadow-sm">
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        <a href="" class="btn btn-success text-decoration-none d-block">
-                            <i class="bi bi-heart me-2"></i>Save Ad
+                        {% if user.user_type == 'customer' %}
+                        <a href="{% url 'app2_ads:add_to_wishlist' ad.pk %}" class="btn btn-success text-decoration-none d-block">
+                            <i class="bi bi-heart me-2"></i>Add to Wishlist
                         </a>
+                        {% endif %}
                         <a href="" class="btn btn-outline-secondary text-decoration-none d-block">
                             <i class="bi bi-heart me-2"></i>Share Ad
                         </a>

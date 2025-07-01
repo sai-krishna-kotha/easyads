@@ -9,7 +9,8 @@ from .views import (
     SellerProfileView,
     CustomerDashboardView,
     CustomerProfileView,
-    remove_from_wishlist
+    remove_from_wishlist,
+    add_to_wishlist,
 )
 
 app_name = 'app2_ads'
@@ -25,5 +26,5 @@ urlpatterns = [
     path('customer_dashboard',CustomerDashboardView.as_view(), name='customer_dashboard'),
     path('customer_profile',CustomerProfileView.as_view(), name='customer_profile'),
     path('remove_it/<int:pk>/',remove_from_wishlist, name="remove_from_wishlist"),
-
+    path('add_it/<int:pk>', add_to_wishlist, name="add_to_wishlist"),
 ]

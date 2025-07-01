@@ -211,8 +211,8 @@ class CustomerProfileView(LoginRequiredMixin, DetailView):
         return context
 
 
-def add_to_wishlist(request, ad_id):
-    ad = get_object_or_404(Ad, pk=ad_id)
+def add_to_wishlist(request, pk):
+    ad = get_object_or_404(Ad, pk=pk)
     request.user.customer.wishlist.add(ad)
     return redirect(request.META.get('HTTP_REFERER', 'wishlist_page'))
 

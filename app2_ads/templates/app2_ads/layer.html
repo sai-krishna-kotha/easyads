@@ -18,17 +18,16 @@
         <h6 class="text-muted mb-0 fw-bold">{{user.user_type|upper}} DASHBOARD</h6>
     </div>
     <nav class="nav flex-column p-3">
+        {% if request.user.user_type == 'seller' %}
         <a class="nav-link active" href="">
             <i class="fas fa-tachometer-alt me-2"></i>
-            {% if request.path|get_currentpage_path == 'seller-dashboard' %}
             Overview
-            {% else %}
-            Wishlist
             {% endif %}
         </a>
-        {% comment %} <a class="nav-link" href="#">
-            <i class="fas fa-plus-circle me-2 text-success"></i>Add New Ad
-        </a> {% endcomment %}
+        <a class="nav-link active" href="">
+            <i class="fas fa-plus-circle me-2 text-success"></i>
+            Wishlist
+        </a>
         {% comment %} <a class="nav-link" href="#">
             <i class="fas fa-list me-2 text-info"></i>My Ads
         </a> {% endcomment %}
@@ -56,6 +55,158 @@
 
 
 {% block content %}
+<main class="main-content" id="mainContent">
+    <!-- Welcome Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Welcome back, {{user.first_name|lower}}</h2>
+            <p class="text-muted mb-0">Here's what's happening with your ads today.</p>
+        </div>
+        {% if request.user.user_type == 'seller' %}
+        <a href="{% url 'app2_ads:create_ad' %}">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Create New Ad
+            </button>
+        </a>
+        {% else %}
+        {% endif %}
+    </div>
+    <!-- Stats Cards -->
+    {% comment %} <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-muted">Total Ads</h6>
+                            <h3 class="mb-0">24</h3>
+                        </div>
+                        <div class="text-primary">
+                            <i class="fas fa-list fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-muted">Active Ads</h6>
+                            <h3 class="mb-0 text-success">18</h3>
+                        </div>
+                        <div class="text-success">
+                            <i class="fas fa-check-circle fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-muted">Total Views</h6>
+                            <h3 class="mb-0">1,247</h3>
+                        </div>
+                        <div class="text-info">
+                            <i class="fas fa-eye fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card stats-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-muted">Messages</h6>
+                            <h3 class="mb-0">12</h3>
+                        </div>
+                        <div class="text-warning">
+                            <i class="fas fa-envelope fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> {% endcomment %}
+
+    <!-- Recent Ads Table -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Recent Ads</h5>
+            <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Ad Title</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            {% comment %} <th>Views</th> {% endcomment %}
+                            <th>Posted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ad in ads %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    {% comment %} <img src="https://via.placeholder.com/40" class="rounded me-2" alt="Product"> {% endcomment %}
+                                    <div>
+                                        <h6 class="mb-0">{{ad.title}}</h6>
+                                        <small class="text-muted">{{ad.description|truncatechars:20}}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ad.category}}</td>
+                            <td>{{ad.price}}</td>
+                            <td><span class="badge bg-success">{{ad.status}}</span></td>
+                            {% comment %} <td>156</td> {% endcomment %}
+                            <td>{{ad.created_at|timesince}}</td>
+                            <td class="table-actions">
+                                <button class="btn btn-sm btn-outline-primary me-1">
+                                <a href="{% url 'app2_ads:ad_detail' ad.pk %}">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </button>
+                                {% if user.user_type == 'seller' %}
+                                
+                                
+                                <button class="btn btn-sm btn-outline-secondary me-1">
+                                    <a href="{% url 'app2_ads:edit_ad' ad.id  %}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </button>
+                                {% endif %}
+                                <button class="btn btn-sm btn-outline-danger">
+                                <a href="{% if user.user_type == 'seller' %}
+                                {% url 'app2_ads:delete_ad' ad.id  %}
+                                {% else %}
+                                {% url 'app2_ads:remove_from_wishlist' ad.pk %}
+                                {% endif %}
+                                ">    
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
 
 {% endblock content %}
 

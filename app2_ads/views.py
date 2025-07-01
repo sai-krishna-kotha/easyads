@@ -185,7 +185,7 @@ class CustomerDashboardView(LoginRequiredMixin, ListView):
     context_object_name = 'ads'
 
     def get_queryset(self):
-        self.customer = Seller.objects.filter(user=self.request.user).first()
+        self.customer = Customer.objects.filter(user=self.request.user).first()
         if self.customer:
             return self.customer.wishlist.all()
         return []
@@ -216,7 +216,7 @@ def add_to_wishlist(request, ad_id):
     request.user.customer.wishlist.add(ad)
     return redirect(request.META.get('HTTP_REFERER', 'wishlist_page'))
 
-def remove_from_wishlist(request, ad_id):
-    ad = get_object_or_404(Ad, pk=ad_id)
+def remove_from_wishlist(request, pk):
+    ad = get_object_or_404(Ad, pk=pk)
     request.user.customer.wishlist.remove(ad)
     return redirect(request.META.get('HTTP_REFERER', 'wishlist_page'))

@@ -12,15 +12,20 @@
                     <a href="#" class="text-light"><i class="bi bi-youtube fs-5"></i></a>
                 </div>
             </div>
-
             <!-- For Users -->
             <div class="col-lg-3 col-md-6">
                 <h5 class="text-uppercase mb-3">For Users</h5>
                 <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Post Free Ad</a></li>
+                    <li class="mb-2"><a href="
+                        {% if request.user.seller %}
+                            {% url 'app2_ads:create_ad' %}
+                        {% else %}
+                            {% url 'app1_users:signin' %}
+                        {% endif %}
+                        " class="text-light text-decoration-none">Post Free Ad</a></li>
                     <li class="mb-2"><a href="#" class="text-light text-decoration-none">Browse Listings</a></li>
                     <li class="mb-2"><a href="#" class="text-light text-decoration-none">Search Tips</a></li>
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Safety Guide</a></li>
+                    {% comment %} <li class="mb-2"><a href="#" class="text-light text-decoration-none">Safety Guide</a></li> {% endcomment %}
                 </ul>
             </div>
 
@@ -28,10 +33,9 @@
             <div class="col-lg-3 col-md-6">
                 <h5 class="text-uppercase mb-3">Categories</h5>
                 <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Electronics</a></li>
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Vehicles</a></li>
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Real Estate</a></li>
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Jobs</a></li>
+                    <li class="mb-2"><a href="{% url 'home' %}" class="text-light text-decoration-none">Electronics</a></li>
+                    <li class="mb-2"><a href="{% url 'home' %}" class="text-light text-decoration-none">Real Estate</a></li>
+                    <li class="mb-2"><a href="{% url 'home' %}" class="text-light text-decoration-none">Jobs</a></li>
                 </ul>
             </div>
 
@@ -39,34 +43,20 @@
             <div class="col-lg-3 col-md-6">
                 <h5 class="text-uppercase mb-3">Support</h5>
                 <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Help Center</a></li>
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Contact Us</a></li>
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Report Issue</a></li>
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Feedback</a></li>
+                    <li class="mb-2"><a href="{% url 'contact' %}" class="text-light text-decoration-none">Contact Us</a></li>
+                    <li class="mb-2"><a href="{% url 'contact' %}" class="text-light text-decoration-none">Report Issue</a></li>
+                    <li class="mb-2"><a href="{% url 'contact' %}" class="text-light text-decoration-none">Feedback</a></li>
                 </ul>
             </div>
 
             <!-- Contact Info -->
             <div class="col-lg-3 col-md-6">
                 <h5 class="text-uppercase mb-3">Get In Touch</h5>
-                <div class="mb-2">
-                    <i class="bi bi-envelope me-2"></i>
-                    <span class="text-light">support@easyad.com</span>
-                </div>
-                <div class="mb-2">
-                    <i class="bi bi-telephone me-2"></i>
-                    <span class="text-light">+91 9876543210</span>
-                </div>
-                <div class="mb-3">
-                    <i class="bi bi-geo-alt me-2"></i>
-                    <span class="text-light">Mumbai, Maharashtra</span>
-                </div>
-                {% comment %} <a href="#" class="btn btn-outline-light btn-sm me-2 mb-2">
-                    <i class="bi bi-google-play me-1"></i>Google Play
-                </a>
-                <a href="#" class="btn btn-outline-light btn-sm mb-2">
-                    <i class="bi bi-apple me-1"></i>App Store
-                </a> {% endcomment %}
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2">support@easyads.com</li>
+                    <li class="mb-2">+91 XXXXX XXXXX</li>
+                    <li class="mb-2">Anantapur, Andhra Pradesh</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -84,9 +74,6 @@
                     </a>
                     <a href="#" class="text-light text-decoration-none me-3">
                         <small>Terms of Service</small>
-                    </a>
-                    <a href="#" class="text-light text-decoration-none">
-                        <small>Cookie Policy</small>
                     </a>
                 </div>
             </div>

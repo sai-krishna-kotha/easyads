@@ -172,6 +172,7 @@ class SellerProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         seller = self.get_object()
         # Attach ads for display
+        context['all_ads'] = seller.ads.all()
         context['ads'] = seller.ads.filter(status='Approved')  # only active ads
         for ad in context['ads']:
             print(ad.title)

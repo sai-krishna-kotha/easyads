@@ -115,6 +115,19 @@ class AdDetailView(DetailView):
     template_name = 'app2_ads/ad_detail.html'
     context_object_name = 'ad'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ad = self.get_object()
+
+        in_wishlist = False
+        user = self.request.user
+
+        if user.is_authenticated and hasattr(user, 'customer'):
+            in_wishlist = ad in user.customer.wishlist.all()
+
+        context['in_wishlist'] = in_wishlist
+        return context
+
 class HomePageView(View):
     def get(self, request):
         sort_option = request.GET.get('sort', 'newest')
@@ -206,7 +219,7 @@ class CustomerProfileView(LoginRequiredMixin, DetailView):
         return context
 
 
-class AddToWishlist(View):
+class AddToWishlist(LoginRequiredMixin, View):
     def get(self, request, pk):
         ad = get_object_or_404(Ad, pk=pk)
         if request.user.user_type == 'customer':
@@ -215,7 +228,7 @@ class AddToWishlist(View):
             request.user.seller.wishlist.add(ad)
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
-class RemoveFromWishlist(View):
+class RemoveFromWishlist(LoginRequiredMixin, View):
     def get(self, request, pk):
         ad = get_object_or_404(Ad, pk=pk)
         if request.user.user_type == 'customer':

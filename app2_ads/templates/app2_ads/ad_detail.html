@@ -78,22 +78,32 @@ Ad Details
             <div class="card shadow-sm">
                 <div class="card-body">
                     <div class="d-grid gap-2">
-                        {% comment %} {% if user.user_type == 'customer' %} {% endcomment %}
-                        <a href="{% url 'app2_ads:add_to_wishlist' ad.pk %}" class="btn btn-success text-decoration-none d-block">
+                        {% if user.is_authenticated and user.user_type == "customer" %}
+                            {% if in_wishlist %}
+                                <a href="{% url 'app2_ads:remove_from_wishlist' ad.id %}" class="btn btn-danger btn-sm">
+                                    ❤️ Remove from Wishlist
+                                </a>
+                            {% else %}
+                                <a href="{% url 'app2_ads:add_to_wishlist' ad.id %}" class="btn btn-outline-primary btn-sm">
+                                    🤍 Add to Wishlist
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'signin' %}" class="btn btn-outline-secondary btn-sm">
+                                🔒 Sign in to add to wishlist
+                            </a>
+                        {% endif %}
+
+                        {% comment %} <a href="{% url 'app2_ads:add_to_wishlist' ad.pk %}" class="btn btn-success text-decoration-none d-block">
                             <i class="bi bi-heart me-2"></i>Add to Wishlist
-                        </a>
-                        {% comment %} {% endif %} {% endcomment %}
-                        <a href="" class="btn btn-outline-secondary text-decoration-none d-block">
+                        </a> {% endcomment %}
+                        <a href="" class="btn btn-sm btn-outline-secondary text-decoration-none d-block">
                             <i class="bi bi-heart me-2"></i>Share Ad
                         </a>
                         
                         {% if ad.seller.user == request.user %}
-                        <a href="{% url 'app2_ads:edit_ad' ad.pk %}" class="btn btn-outline-secondary text-decoration-none d-block">
+                        <a href="{% url 'app2_ads:edit_ad' ad.pk %}" class="btn btn-sm btn-outline-secondary text-decoration-none d-block">
                             <i class="bi bi-heart me-2"></i>Edit Ad
-                        </a>
-                        {% else %}
-                        <a href="" class="btn btn-outline-secondary text-decoration-none d-block">
-                            <i class="bi bi-heart me-2"></i>Report Ad
                         </a>
                         {% endif %}
                     </div>

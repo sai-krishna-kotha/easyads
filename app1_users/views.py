@@ -9,6 +9,7 @@ from .forms import LoginForm
 from .models import User
 from django.contrib import messages  # for error messages
 from django.contrib.auth import logout
+from app2_ads.models import Customer
 
 def testing(request):
     return render(request, 'testing.html')
@@ -18,8 +19,10 @@ def signup(request):
         form = UserSignUpForm(request.POST)
         print(form.is_valid())
         if form.is_valid():
-            form.save()
+            user = form.save()
             messages.success(request, "Account created successfully. You can now log in.")
+            if form.cleaned_data['user_type'] == 'customer':
+                Customer.objects.create(user=user)
             return redirect('signin')  # Use the name of your signin URL
         else:
             # Add form errors to messages

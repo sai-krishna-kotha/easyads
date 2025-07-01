@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ad, Category, Seller
+from .models import Ad, Category, Seller, Customer
 
 # Register your models here.
 
@@ -19,3 +19,4 @@ class AdAdmin(admin.ModelAdmin):
 
 admin.site.register(Category)
 admin.site.register(Seller)
+admin.site.register(Customer)

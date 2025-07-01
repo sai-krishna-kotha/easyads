@@ -104,4 +104,6 @@ class Ad(models.Model):
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer')
-    wishlist = models.ManyToManyField(Ad, related_name='wishlisted_by')
+    wishlist = models.ManyToManyField(Ad, blank=True, related_name='wishlisted_by')
+    def __str__(self):
+        return f"{self.user}"

@@ -10,7 +10,7 @@ class Seller(models.Model):
     phone = models.CharField(max_length=15)
     city = models.TextField(blank=True,max_length=200)
     verified = models.BooleanField(default=False)
-
+    wishlist = models.ManyToManyField('Ad', blank=True,related_name="wishlist")
     class Meta:
         db_table = 'seller'
         verbose_name = 'Seller'

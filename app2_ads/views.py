@@ -210,13 +210,21 @@ class CustomerProfileView(LoginRequiredMixin, DetailView):
         print(f"{context['wishlist']}\n\n\n")
         return context
 
+class AddToWishlist(View):
+    def get(self, request, pk):
+        ad = get_object_or_404(Ad, pk=pk)
+        if request.user.user_type == 'customer':
+            request.user.customer.wishlist.add(ad)
+        elif request.user.user_type == 'seller':
+            request.user.seller.wishlist.add(ad)
 
-def add_to_wishlist(request, pk):
-    ad = get_object_or_404(Ad, pk=pk)
-    request.user.customer.wishlist.add(ad)
-    return redirect(request.META.get('HTTP_REFERER', 'wishlist_page'))
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+class RemoveFromWishlist(View):
+    def get(self, request, pk):
+        ad = get_object_or_404(Ad, pk=pk)
+        if request.user.user_type == 'customer':
+            request.user.customer.wishlist.remove(ad)
+        elif request.user.user_type == 'seller':
+            request.user.seller.wishlist.remove(ad)
 
-def remove_from_wishlist(request, pk):
-    ad = get_object_or_404(Ad, pk=pk)
-    request.user.customer.wishlist.remove(ad)
-    return redirect(request.META.get('HTTP_REFERER', 'wishlist_page'))
+        return redirect(request.META.get('HTTP_REFERER', '/'))

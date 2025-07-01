@@ -22,9 +22,12 @@
         <a class="nav-link active" href="">
             <i class="fas fa-tachometer-alt me-2"></i>
             Overview
-            {% endif %}
         </a>
-        <a class="nav-link active" href="">
+        {% endif %}
+        <a class="nav-link 
+        {% if user.user_type == 'customer' %}
+        active
+        {% endif %}" href="">
             <i class="fas fa-plus-circle me-2 text-success"></i>
             Wishlist
         </a>
@@ -150,7 +153,6 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Status</th>
-                            {% comment %} <th>Views</th> {% endcomment %}
                             <th>Posted</th>
                             <th>Actions</th>
                         </tr>
@@ -170,7 +172,6 @@
                             <td>{{ad.category}}</td>
                             <td>{{ad.price}}</td>
                             <td><span class="badge bg-success">{{ad.status}}</span></td>
-                            {% comment %} <td>156</td> {% endcomment %}
                             <td>{{ad.created_at|timesince}}</td>
                             <td class="table-actions">
                                 <button class="btn btn-sm btn-outline-primary me-1">

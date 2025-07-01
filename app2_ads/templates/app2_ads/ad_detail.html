@@ -67,7 +67,7 @@ Ad Details
                     </div>
                     
                     <!-- Contact Actions -->
-                    <a href="{% url 'app2_ads:seller_profile' user.seller.pk %}" class="btn btn-primary text-decoration-none d-block">
+                    <a href="{% url 'app2_ads:seller_profile' ad.seller.pk %}" class="btn btn-primary text-decoration-none d-block">
                         <i class="bi bi-heart me-2"></i>See Profile
                     </a>
                     
@@ -85,10 +85,15 @@ Ad Details
                             <i class="bi bi-heart me-2"></i>Share Ad
                         </a>
                         
-                        
-                        <button class="btn btn-outline-danger" type="button">
-                            <i class="bi bi-flag me-2"></i>Report Ad
-                        </button>
+                        {% if ad.seller.user == request.user %}
+                        <a href="{% url 'app2_ads:edit_ad' ad.pk %}" class="btn btn-outline-secondary text-decoration-none d-block">
+                            <i class="bi bi-heart me-2"></i>Edit Ad
+                        </a>
+                        {% else %}
+                        <a href="" class="btn btn-outline-secondary text-decoration-none d-block">
+                            <i class="bi bi-heart me-2"></i>Report Ad
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -103,7 +108,7 @@ Ad Details
             <a href="{% url 'home' %}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Back to Listings
             </a>
-            {% if user.user_type == 'seller' %}
+            {% if ad.seller.user == request.user %}
             <a href="{% url 'app2_ads:seller_dashboard' %}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Seller Dashboard
             </a>

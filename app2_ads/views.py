@@ -1,3 +1,4 @@
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import (ListView, CreateView, UpdateView, View,DeleteView,DetailView)
 from django.contrib.auth.mixins import (LoginRequiredMixin,
@@ -10,7 +11,14 @@ from .forms import AdForm, SellerForm
 from django.views import View
 from django.db.models import Q
 
-class SellerRegistrationView(LoginRequiredMixin, View):
+class SellerRegistrationView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        current_user = self.request.user.user_type
+        return current_user == 'seller' or current_user == 'admin'
+
+    def handle_no_permission(self):
+        return HttpResponseForbidden("You are not authorized to access this page.")
+    
     def get(self, request):
         form = SellerForm()
         return render(request, 'app2_ads/seller-registration.html', {'form': form})
@@ -28,9 +36,10 @@ class SellerRegistrationView(LoginRequiredMixin, View):
                 for error in errors:
                     messages.error(request, f"{field}: {error}")
             return redirect('app2_ads:seller_dashboard')
+    
 
 
-class SellerDashboardView(LoginRequiredMixin, ListView):
+class SellerDashboardView(LoginRequiredMixin,  ListView):
     model = Ad
     template_name = 'app2_ads/seller_dashboard.html'
     context_object_name = 'ads'
@@ -45,17 +54,23 @@ class SellerDashboardView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['seller'] = getattr(self, 'seller', None)
         if not self.seller:
-            context['verification'] = {"isRegistered": False}
             context['form'] = SellerForm()
         return context
 
 
-class AdCreateView(LoginRequiredMixin, CreateView):
+class AdCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Ad
     form_class = AdForm
     template_name = 'app2_ads/create_ad.html'
     success_url = reverse_lazy('app2_ads:seller_dashboard')
 
+    def test_func(self):
+        current_user = self.request.user.user_type
+        return current_user == 'seller' or current_user == 'admin'
+
+    def handle_no_permission(self):
+        return HttpResponseForbidden("You are not authorized to access this page.")
+    
     def form_valid(self, form):
         seller = get_object_or_404(Seller, user=self.request.user)
         form.instance.seller = seller
@@ -63,12 +78,20 @@ class AdCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class AdUpdateView(LoginRequiredMixin, UpdateView):
+class AdUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ad
     form_class = AdForm
     template_name = 'app2_ads/edit_ad.html'
     success_url = reverse_lazy('app2_ads:seller_dashboard')
 
+    def test_func(self):
+        ad = self.get_object()
+        current_user = self.request.user
+        return ad.seller.user == current_user or current_user.user_type == 'admin'
+
+    def handle_no_permission(self):
+        return HttpResponseForbidden("You are not authorized to access this page.")
+    
     def get_queryset(self):
         seller = get_object_or_404(Seller, user=self.request.user)
         return Ad.objects.filter(seller=seller)  # Ensures seller can only edit their own ads
@@ -79,9 +102,13 @@ class AdDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy('app2_ads:seller_dashboard')
 
     def test_func(self):
-        # Only allow the seller who owns the ad to delete it
+        # Only allow the admin and seller who owns the ad to delete it
         ad = self.get_object()
-        return ad.seller.user == self.request.user
+        current_user = self.request.user
+        return ad.seller.user == current_user or current_user.user_type == 'admin'
+
+    def handle_no_permission(self):
+        return HttpResponseForbidden("You are not authorized to access this page.")
 
 class AdDetailView(DetailView):
     model = Ad

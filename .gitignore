@@ -5,5 +5,5 @@ node_modules/
 *.pyx
 __pycache__/
 .env
-
+staticfiles/
 # A4qeBRPF8Rducw5bcQ6gVIO3z1itaS44dvnyBUmgEBORUPSM7Z9efwY3KzBk8MFrXrguF1tQZbUINSM1XgvWj3lN81sOxqEGyF5toPKofCEgPx4l7Goh7IVKk9w0pcWsY1Hx/NIRbTzPU+zoyDh8T/f2+JfutO5HR2sZX1HYjpXuuBrijraYneWv/Rv7M1VhJUKCvo1//M1bg/DSod/reUuAvNs2MXg/M5Tb/2p7x9IZyh1ukbk6c1VqE3gSlrfQ10Rd+I41/o1F1wlIxF283KmhPdF3lv2pwveXekJ3tpOjbEuBgQNmV7aeuZOAatuQOGUw2OXA1kfhBmTbhw/a6ELRzhJVyrkv5wNQLfrDl2UkMLafIxTa0fG3K57x

@@ -17,7 +17,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 django.setup()
 
 # Step 4: Import your Category model
-from app2_ads.models import Category
+from user_management.models import Category
 
 # Step 5: Define categories
 categories = [

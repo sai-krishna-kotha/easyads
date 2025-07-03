@@ -30,7 +30,8 @@ DEBUG = os.environ.get('DEBUG', default=False)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 AUTH_USER_MODEL = 'app1_users.User'
 

@@ -14,7 +14,15 @@ Home - EasyAd
             <div class="col-md-8">
                 <h1 class="display-5 fw-bold mb-3">Find Everything You Need</h1>
                 <p class="lead mb-4">Buy and sell anything in your local area with EasyAd - India's trusted classified marketplace</p>
-                <a href="" class="btn btn-warning btn-lg">
+                <a href="
+                {% if request.user.user_type == 'seller' %}
+                {% url 'app2_ads:create_ad' %}
+                {% elif request.user.user_type == 'customer' %}
+                {% url 'home' %}
+                {% else %}
+                {% url 'app1_users:signin' %}
+                {% endif %}
+                " class="btn btn-warning btn-lg">
                     <i class="bi bi-plus-circle me-2"></i>Post Free Ad
                 </a>
             </div>

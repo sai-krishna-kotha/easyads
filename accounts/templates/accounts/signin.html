@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:accounts/templates/app1_users/signin.html
 {% extends "accounts/layer.html" %}
-========
-{% extends "users/layer.html" %}
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/templates/app1_users/signin.html
 
 {% load static %}
 
@@ -11,12 +7,7 @@ Login - EasyAds
 {% endblock title%}
 
 {% block extra_links %}
-<<<<<<<< HEAD:accounts/templates/app1_users/signin.html
 <link rel="stylesheet" href='{% static "accounts/css/style.css" %}'>
-========
-<link rel="stylesheet" href='{% static "users/css/style.css" %}'>
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/templates/app1_users/signin.html
-
 {% endblock extra_links %}
 
 {% block content %}
@@ -58,21 +49,13 @@ Login - EasyAds
     </div>
     
     <span class="forgot-password">
-<<<<<<<< HEAD:accounts/templates/app1_users/signin.html
       <a href="{% url 'accounts:reset_password' %}">Forgot Password?</a>
-========
-      <a href="{% url 'users:reset_password' %}">Forgot Password?</a>
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/templates/app1_users/signin.html
     </span>
     
     <button type="submit" class="login-btn">Login</button>
     
     <div class="signup-link">
-<<<<<<<< HEAD:accounts/templates/app1_users/signin.html
       Don't have an account? <a href="{% url 'accounts:signup' %}">Sign up</a>
-========
-      Don't have an account? <a href="{% url 'users:signup' %}">Sign up</a>
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/templates/app1_users/signin.html
     </div>
   </form>
 </div>
@@ -100,9 +83,5 @@ Login - EasyAds
 {% endblock content %}
 
 {% block extra_scripts %}
-<<<<<<<< HEAD:accounts/templates/app1_users/signin.html
   <script src="{% static 'accounts/js/script.js' %}"></script>
-========
-  <script src="{% static 'users/js/script.js' %}"></script>
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/templates/app1_users/signin.html
 {% endblock extra_scripts %}

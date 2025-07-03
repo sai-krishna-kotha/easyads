@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -30,7 +31,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    username = None  # Remove the default username field
+    username = None
     email = models.EmailField(_('email address'), unique=True)
 
     USER_TYPE_CHOICES = (
@@ -41,7 +42,7 @@ class User(AbstractUser):
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []  # Only email is required
+    REQUIRED_FIELDS = [] 
 
     objects = UserManager()
 

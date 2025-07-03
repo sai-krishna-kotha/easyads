@@ -17,27 +17,20 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
-<<<<<<< HEAD
 from accounts.views import signin
 from classifieds.views import HomePageView,AboutView,ContactView
-=======
-from users.views import signin
-from user_management.views import HomePageView,AboutView,ContactView
->>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
 from django.conf.urls.static import static
+
+
+
 urlpatterns = [
     path('admin/login/', signin,name="signin"),
     path('admin/', admin.site.urls),
     path('',HomePageView.as_view(), name='home'),
     path('about/',AboutView.as_view(), name="about"),
     path('contact/',ContactView.as_view(), name="contact"),
-<<<<<<< HEAD
     path('users/', include('accounts.urls')),
     path('ads/', include('classifieds.urls')),
-=======
-    path('users/', include('users.urls')),
-    path('ads/', include('user_management.urls')),
->>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
 ]
 
 if settings.DEBUG:

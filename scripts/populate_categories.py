@@ -1,29 +1,19 @@
-# scripts/populate_categories.py
-
 import os
 import sys
 import django
 from django.utils.text import slugify
 
-# Step 1: Add the root directory (where manage.py is) to sys.path
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # /easyads/scripts
-PROJECT_ROOT = os.path.dirname(BASE_DIR)               # /easyads
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BASE_DIR)  
+     
 sys.path.append(PROJECT_ROOT)
 
-# Step 2: Set Django settings module
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 
-# Step 3: Setup Django
 django.setup()
 
-# Step 4: Import your Category model
-<<<<<<< HEAD
 from classifieds.models import Category
-=======
-from user_management.models import Category
->>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
 
-# Step 5: Define categories
 categories = [
     "Mobiles", "Electronics & Appliances", "Vehicles", "Furniture", "Real Estate", "Jobs",
     "Services", "Pets", "Books, Sports & Hobbies", "Fashion", "Kids & Babies", "Education",
@@ -32,7 +22,6 @@ categories = [
     "Art & Collectibles", "Computer & Laptops", "Cameras & Lenses"
 ]
 
-# Step 6: Populate DB
 for name in categories:
     slug = slugify(name)
     category, created = Category.objects.get_or_create(name=name, slug=slug)

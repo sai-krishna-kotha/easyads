@@ -4,21 +4,15 @@ import sys
 import random
 from faker import Faker
 
-# Step 1: Setup Django environment
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # /easyads/scripts
-PROJECT_ROOT = os.path.dirname(BASE_DIR)               # /easyads
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
+PROJECT_ROOT = os.path.dirname(BASE_DIR)
+
 sys.path.append(PROJECT_ROOT)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 django.setup()
 
-# Step 2: Import your models
-<<<<<<< HEAD
 from classifieds.models import Ad, Seller, Category, City
-=======
-from user_management.models import Ad, Seller, Category, City
->>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
 
-# Step 3: Generate fake data
 fake = Faker()
 num_ads = 20
 

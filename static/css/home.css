@@ -1,5 +1,5 @@
 body {
-    padding-top: 63px; /* Account for fixed navbar */
+    padding-top: 63px;
     background-color: #f8f9fa;
 }
 
@@ -32,6 +32,5 @@ body {
 .search-section {
     background: white;
     border-radius: 10px;
-    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
 }
 

@@ -15,44 +15,37 @@ import os
 import dj_database_url 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
 SECRET_KEY = os.environ.get('SECRET_KEY')
+
 DEBUG = os.environ.get('DEBUG', default=False)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# Environment variables
-
-# SECURITY WARNING: don't run with debug turned on in production!
-
-# ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
 AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
-    'accounts.backends.EmailUserTypeBackend',  # adjust to your app's path
-    # 'django.contrib.auth.backends.ModelBackend'
+    'accounts.backends.EmailUserTypeBackend',
+    # 'django.contrib.auth.backends.ModelBackend' # fallback
 ]
 LOGIN_REDIRECT_URL = '/'
 
-# Application definition
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 7200
 
 INSTALLED_APPS = [
-    # 'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # look for app static files by default
+    'django.contrib.staticfiles',
 
     'accounts',
     'classifieds',
@@ -92,6 +85,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'easyads.wsgi.application'
 
+# LOCAL DEV DATABASE
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -103,14 +97,15 @@ WSGI_APPLICATION = 'easyads.wsgi.application'
 #     }
 # }
 
+# ONLINE RENDER DATABASE
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),  # ← External URL from Render env
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600
     )
 }
 
-
+# ONLINE AIVEN DATABASE
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -128,8 +123,6 @@ DATABASES = {
 # }
 
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     # {
     #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -147,8 +140,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Kolkata'
@@ -159,18 +150,17 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

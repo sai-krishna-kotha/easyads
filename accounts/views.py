@@ -9,12 +9,7 @@ from .forms import LoginForm
 from .models import User
 from django.contrib import messages  # for error messages
 from django.contrib.auth import logout
-<<<<<<<< HEAD:accounts/views.py
 from classifieds.models import Customer
-========
-from user_management.models import Customer
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/views.py
-
 def testing(request):
     return render(request, 'testing.html')
 
@@ -27,23 +22,17 @@ def signup(request):
             messages.success(request, "Account created successfully. You can now log in.")
             if form.cleaned_data['user_type'] == 'customer':
                 Customer.objects.create(user=user)
-            return redirect('signin')  # Use the name of your signin URL
+            return redirect('signin') 
         else:
-            # Add form errors to messages
             print(form.errors.items())
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{error}")
-            return redirect('signup')  # Use the name of your signup URL
+            return redirect('signup') 
     else:
         form = UserSignUpForm()
     
-<<<<<<<< HEAD:accounts/views.py
     return render(request, 'accounts/signup.html', {'form': form})
-========
-    return render(request, 'users/signup.html', {'form': form})
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/views.py
-
 
 def signin(request):
     if request.method == 'POST':
@@ -55,46 +44,35 @@ def signin(request):
             user_type = form.cleaned_data['user_type']
             print(form.cleaned_data)
             try:
-                # user_obj = User.objects.get(email=email)
                 user = authenticate(request, email=email, password=password, user_type=user_type)
                 if user is not None:
                     print(user.user_type)
                     login(request, user)
-                    return redirect('home')  # change 'home' to your actual home url name
+                    return redirect('home')  
                 else:
                     messages.error(request, "Invalid password.")
             except User.DoesNotExist:
                 messages.error(request, "Email does not exist.")
         else:
-            # If form is invalid, add form errors to messages
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{field}: {error}")
 
-        # After handling POST errors, redirect to GET signin page
-        return redirect('signin')  # change 'signin' to your signin url name
-
+        return redirect('signin') 
     else:
         form = LoginForm()
 
-<<<<<<<< HEAD:accounts/views.py
     return render(request, 'accounts/signin.html', {'form': form})
-========
-    return render(request, 'users/signin.html', {'form': form})
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/views.py
 
 
 def signout(request):
     logout(request)
-    return redirect('signin')  # or 'signin' if you prefer
+    return redirect('signin')
 
 
 def reset_password(request):
-<<<<<<<< HEAD:accounts/views.py
     return render(request, "accounts/reset-pass.html")
-========
-    return render(request, "users/reset_pass.html")
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:users/views.py
+
 
 def filter_fields(request):
     pass

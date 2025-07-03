@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
+
 class UserSignUpForm(UserCreationForm):
     USER_TYPE_CHOICES = (
         ('', '----------'),
@@ -32,8 +33,6 @@ class UserSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
-
-
 
 
 class LoginForm(forms.Form):

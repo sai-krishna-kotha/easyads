@@ -16,11 +16,19 @@ Home - EasyAd
                 <p class="lead mb-4">Buy and sell anything in your local area with EasyAd - India's trusted classified marketplace</p>
                 <a href="
                 {% if request.user.user_type == 'seller' %}
+<<<<<<< HEAD
                 {% url 'classifieds:create_ad' %}
                 {% elif request.user.user_type == 'customer' %}
                 {% url 'home' %}
                 {% else %}
                 {% url 'accounts:signin' %}
+=======
+                {% url 'user_management:create_ad' %}
+                {% elif request.user.user_type == 'customer' %}
+                {% url 'home' %}
+                {% else %}
+                {% url 'users:signin' %}
+>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
                 {% endif %}
                 " class="btn btn-warning btn-lg">
                     <i class="bi bi-plus-circle me-2"></i>Post Free Ad
@@ -145,7 +153,11 @@ Home - EasyAd
             <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                 <div class="card ad-card h-100 shadow-sm">
                     <div class="card-body d-flex flex-column">
+<<<<<<< HEAD
                         <a href="{% url 'classifieds:ad_detail' ad.pk %}" class="text-decoration-none">
+=======
+                        <a href="{% url 'user_management:ad_detail' ad.pk %}" class="text-decoration-none">
+>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
                             <h6 class="card-title text-dark">{{ad.title}}</h6>
                         </a>
                         <p class="card-text flex-grow-1 text-muted">{{ad.description|truncatechars:45}}</p>

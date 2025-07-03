@@ -18,9 +18,15 @@
                 <ul class="list-unstyled mb-0">
                     <li class="mb-2"><a href="
                         {% if request.user.seller %}
+<<<<<<< HEAD
                             {% url 'classifieds:create_ad' %}
                         {% else %}
                             {% url 'accounts:signin' %}
+=======
+                            {% url 'user_management:create_ad' %}
+                        {% else %}
+                            {% url 'users:signin' %}
+>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
                         {% endif %}
                         " class="text-light text-decoration-none">Post Free Ad</a></li>
                     <li class="mb-2"><a href="#" class="text-light text-decoration-none">Browse Listings</a></li>

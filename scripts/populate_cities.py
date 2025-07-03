@@ -13,7 +13,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 # Step 3: Setup Django
 django.setup()
 
+<<<<<<< HEAD
 from classifieds.models import City
+=======
+from user_management.models import City
+>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
 from django.utils.text import slugify
 
 indian_cities = [

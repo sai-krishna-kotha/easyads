@@ -17,7 +17,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 django.setup()
 
 # Step 4: Import your Category model
+<<<<<<< HEAD
 from classifieds.models import Category
+=======
+from user_management.models import Category
+>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
 
 # Step 5: Define categories
 categories = [

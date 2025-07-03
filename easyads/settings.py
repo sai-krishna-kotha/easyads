@@ -33,10 +33,17 @@ DEBUG = os.environ.get('DEBUG', default=False)
 # ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
+<<<<<<< HEAD
 AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.EmailUserTypeBackend',  # adjust to your app's path
+=======
+AUTH_USER_MODEL = 'users.User'
+
+AUTHENTICATION_BACKENDS = [
+    'users.backends.EmailUserTypeBackend',  # adjust to your app's path
+>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
     # 'django.contrib.auth.backends.ModelBackend'
 ]
 LOGIN_REDIRECT_URL = '/'
@@ -54,8 +61,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', # look for app static files by default
 
+<<<<<<< HEAD
     'accounts',
     'classifieds',
+=======
+    'users',
+    'user_management',
+>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5
 ]
 
 MIDDLEWARE = [

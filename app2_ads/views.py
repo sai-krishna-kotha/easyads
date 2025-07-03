@@ -21,7 +21,7 @@ class SellerRegistrationView(LoginRequiredMixin, UserPassesTestMixin, View):
     
     def get(self, request):
         form = SellerForm()
-        return render(request, 'app2_ads/seller-registration.html', {'form': form})
+        return render(request, 'app2_ads/seller_registration.html', {'form': form})
 
     def post(self, request):
         form = SellerForm(request.POST)

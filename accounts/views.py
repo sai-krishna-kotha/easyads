@@ -76,3 +76,6 @@ def reset_password(request):
 
 def filter_fields(request):
     pass
+
+def health(request):
+    return HttpResponse('Everything is fine. Probably...😎',status=200)

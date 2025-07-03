@@ -17,7 +17,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
-from accounts.views import signin
+from accounts.views import signin,health
 from classifieds.views import HomePageView,AboutView,ContactView
 from django.conf.urls.static import static
 
@@ -25,6 +25,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/login/', signin,name="signin"),
+    path('health/',health, name="health"),
     path('admin/', admin.site.urls),
     path('',HomePageView.as_view(), name='home'),
     path('about/',AboutView.as_view(), name="about"),

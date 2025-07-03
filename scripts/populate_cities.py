@@ -13,7 +13,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 # Step 3: Setup Django
 django.setup()
 
-from app2_ads.models import City
+from classifieds.models import City
 from django.utils.text import slugify
 
 indian_cities = [

@@ -12,7 +12,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 django.setup()
 
 # Step 2: Import your models
-from app2_ads.models import Ad, Seller, Category, City
+from classifieds.models import Ad, Seller, Category, City
 
 # Step 3: Generate fake data
 fake = Faker()

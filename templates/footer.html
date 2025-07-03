@@ -18,9 +18,9 @@
                 <ul class="list-unstyled mb-0">
                     <li class="mb-2"><a href="
                         {% if request.user.seller %}
-                            {% url 'app2_ads:create_ad' %}
+                            {% url 'classifieds:create_ad' %}
                         {% else %}
-                            {% url 'app1_users:signin' %}
+                            {% url 'accounts:signin' %}
                         {% endif %}
                         " class="text-light text-decoration-none">Post Free Ad</a></li>
                     <li class="mb-2"><a href="#" class="text-light text-decoration-none">Browse Listings</a></li>

@@ -93,34 +93,34 @@
                     <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-md-start ">
                         <li><a class="dropdown-item" href='    
                         {% if user.seller %} 
-                        {% url "app2_ads:seller_profile" user.seller.pk %} 
+                        {% url "classifieds:seller_profile" user.seller.pk %} 
                         {% elif user.user_type == "customer" %}
-                        {% url "app2_ads:customer_profile" %}
+                        {% url "classifieds:customer_profile" %}
                         {% else %}
-                        {% url "app2_ads:seller_registration" %}
+                        {% url "classifieds:seller_registration" %}
                         {% endif %}'>Profile</a></li>
                         {% comment %} {% if user.user_type == 'seller' %} {% endcomment %}
                         <li><a class="dropdown-item" href='
                         {% if user.seller %}
-                        {% url "app2_ads:seller_dashboard" %}
+                        {% url "classifieds:seller_dashboard" %}
                         {% elif user.user_type == "customer" %}
-                        {% url "app2_ads:customer_dashboard" %}
+                        {% url "classifieds:customer_dashboard" %}
                         {% else %}
-                        {% url "app2_ads:seller_registration" %}
+                        {% url "classifieds:seller_registration" %}
                         {% endif %}'>Dashboard</a></li>
                         {% comment %} {% elif user.user_type == 'customer' %}
                         <li><a class="dropdown-item" href=''>Dashboard</a></li> {% endcomment %}
                         {% comment %} {% endif %} {% endcomment %}
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href='{% url "app1_users:signout" %}'>Sign out</a></li>
+                        <li><a class="dropdown-item" href='{% url "accounts:signout" %}'>Sign out</a></li>
                     </ul>
                 </div>
 
 
 
                 {% else %}
-                    <a href='{% url "app1_users:signin" %}' class="btn btn-outline-primary btn-sm btn-auth">Login</a>
-                    <a href='{% url "app1_users:signup" %}' class="btn btn-primary btn-sm btn-auth">Register</a>
+                    <a href='{% url "accounts:signin" %}' class="btn btn-outline-primary btn-sm btn-auth">Login</a>
+                    <a href='{% url "accounts:signup" %}' class="btn btn-primary btn-sm btn-auth">Register</a>
                 {% endif %}
             </div>
         </div>

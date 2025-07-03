@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+Ad Details
+{% endblock title %}
+
+{% block content %}
+<div class="flex container py-4 justify-content-between">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8 col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <!-- Header Section -->
+                    <div class="mb-4">
+                        <h1 class="h2 mb-2">{{ ad.title }}</h1>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-primary me-2">{{ ad.category.name }}</span>
+                            <small class="text-muted">Posted {{ ad.created_at|timesince }} ago</small>
+                        </div>
+                        <h3 class="text-success fw-bold">₹{{ ad.price }}</h3>
+                    </div>
+
+                    <!-- Description Section -->
+                    <div class="mb-4">
+                        <h5>Description</h5>
+                        <p class="text-muted">{{ ad.description }}</p>
+                    </div>
+
+                    <!-- Ad Details -->
+                    <div class="mb-4">
+                        <h5>Ad Details</h5>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p><i class="bi bi-geo-alt me-2"></i><strong>City:</strong> {{ ad.city }}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p><i class="bi bi-check-circle me-2"></i><strong>Status:</strong> 
+                                    <span class="badge bg-{% if ad.status == 'active' %}success{% else %}secondary{% endif %}">
+                                        {{ ad.status|title }}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4 col-md-5">
+            <!-- Seller Info Card -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">Seller Information</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="bi bi-person-fill text-white"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">{{ ad.seller.user.first_name }}</h6>
+                            <small class="text-muted">{{ ad.seller.user.email }}</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Actions -->
+                    <a href="{% url 'classifieds:seller_profile' ad.seller.pk %}" class="btn btn-primary text-decoration-none d-block">
+                        <i class="bi bi-heart me-2"></i>See Profile
+                    </a>
+                    
+                </div>
+            </div>
+
+            <!-- Quick Actions Card -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        {% if user.is_authenticated and user.user_type == "customer" %}
+                            {% if in_wishlist %}
+                                <a href="{% url 'classifieds:remove_from_wishlist' ad.id %}" class="btn btn-danger btn-sm">
+                                    ❤️ Remove from Wishlist
+                                </a>
+                            {% else %}
+                                <a href="{% url 'classifieds:add_to_wishlist' ad.id %}" class="btn btn-outline-primary btn-sm">
+                                    🤍 Add to Wishlist
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            <a href="{% url 'signin' %}" class="btn btn-outline-secondary btn-sm">
+                                🔒 Sign in to add to wishlist
+                            </a>
+                        {% endif %}
+
+                        {% comment %} <a href="{% url 'classifieds:add_to_wishlist' ad.pk %}" class="btn btn-success text-decoration-none d-block">
+                            <i class="bi bi-heart me-2"></i>Add to Wishlist
+                        </a> {% endcomment %}
+                        <a href="" class="btn btn-sm btn-outline-secondary text-decoration-none d-block">
+                            <i class="bi bi-heart me-2"></i>Share Ad
+                        </a>
+                        
+                        {% if ad.seller.user == request.user %}
+                        <a href="{% url 'classifieds:edit_ad' ad.pk %}" class="btn btn-sm btn-outline-secondary text-decoration-none d-block">
+                            <i class="bi bi-heart me-2"></i>Edit Ad
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    </div>
+
+</div>
+    <!-- Navigation -->
+    {% comment %} <div class="d-flex container py-4"> {% endcomment %}
+
+    <div class="row my-5 ">
+        <div class="col-12 d-flex justify-content-between">
+            <a href="{% url 'home' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Back to Listings
+            </a>
+            {% if ad.seller.user == request.user %}
+            <a href="{% url 'classifieds:seller_dashboard' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Seller Dashboard
+            </a>
+            {% else %}
+            {% endif %}
+        </div>
+        
+    </div>
+    </div>
+{% endblock %}

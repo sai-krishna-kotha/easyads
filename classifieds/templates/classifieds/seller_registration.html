@@ -7,15 +7,10 @@ Seller Registration
 {% endblock title %}
 
 {% block extra_links %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/seller_registration.html
 <link rel="stylesheet" href="{% static 'classifieds/css/form.css' %}">
-========
-<link rel="stylesheet" href="{% static 'user_management/css/form.css' %}">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/seller_registration.html
 {% endblock extra_links %}
 
 {% block content %}
-
 
 <div class="form-container">
     <h2 class="form-header">Register your details</h2>
@@ -26,11 +21,7 @@ Seller Registration
         {% endfor %}
     </ul>
     {% endif %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/seller_registration.html
     <form action="{% url 'classifieds:seller_registration' %}" method="post">
-========
-    <form action="{% url 'user_management:seller_registration' %}" method="post">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/seller_registration.html
         {% csrf_token %}
         <div class="form-group">
             <label for="{{ form.business_name.id_for_label }}">Business Name :</label>
@@ -48,8 +39,5 @@ Seller Registration
         <button type="submit" class="submit-btn">Submit</button>
     </form>
 </div>
-
-
-
 {% endblock content %}
 

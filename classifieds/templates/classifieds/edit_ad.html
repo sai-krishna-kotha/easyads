@@ -7,15 +7,8 @@ Create Ad
 {% endblock title %}
 
 {% block extra_links %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/edit_ad.html
 <link rel="stylesheet" href="{% static 'classifieds/css/form.css' %}">
-========
-<link rel="stylesheet" href="{% static 'user_management/css/form.css' %}">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/edit_ad.html
 {% endblock extra_links %}
-{% comment %} <form method="POST" enctype="multipart/form-data"> {% endcomment %}
-    {% comment %} <h2>Post New Ad</h2> {% endcomment %}
-
 {% block content %}
 <div class="form-container">
     <h2 class="form-header">Post your Ad</h2>
@@ -26,11 +19,7 @@ Create Ad
         {% endfor %}
     </ul>
     {% endif %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/edit_ad.html
     <form action="{% url 'classifieds:edit_ad' ad.pk %}" method="post" enctype="multipart/form-data">
-========
-    <form action="{% url 'user_management:edit_ad' ad.pk %}" method="post" enctype="multipart/form-data">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/edit_ad.html
         {% csrf_token %}
         <div class="form-group">
             <label for="{{ form.title.id_for_label }}">Ad Title</label>
@@ -48,10 +37,6 @@ Create Ad
             <label for="{{form.city.id_for_label}}">city</label>
             {{form.city}}
         </div>
-        {% comment %} <div class="form-group">
-            <label for="{{form.image.id_for_label}}">Image</label>
-            {{form.image}}
-        </div> {% endcomment %}
         <div class="form-group">
             <label for="{{form.category.id_for_label}}">Category</label>
             {{form.category}}

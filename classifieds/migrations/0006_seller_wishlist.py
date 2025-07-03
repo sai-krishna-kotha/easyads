@@ -6,21 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-<<<<<<<< HEAD:classifieds/migrations/0006_seller_wishlist.py
         ('classifieds', '0005_alter_customer_wishlist'),
-========
-        ('user_management', '0005_alter_customer_wishlist'),
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/migrations/0006_seller_wishlist.py
     ]
 
     operations = [
         migrations.AddField(
             model_name='seller',
             name='wishlist',
-<<<<<<<< HEAD:classifieds/migrations/0006_seller_wishlist.py
             field=models.ManyToManyField(blank=True, related_name='wishlist', to='classifieds.ad'),
-========
-            field=models.ManyToManyField(blank=True, related_name='wishlist', to='user_management.ad'),
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/migrations/0006_seller_wishlist.py
         ),
     ]

@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import Ad, Category, Seller, Customer
 
-# Register your models here.
-
 @admin.register(Ad)
 class AdAdmin(admin.ModelAdmin):
     list_display = ['title', 'seller', 'status', 'created_at']

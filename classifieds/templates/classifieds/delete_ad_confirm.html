@@ -11,11 +11,7 @@ Confirm Ad delete
 
     <form method="post">
         {% csrf_token %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/delete_ad_confirm.html
         <a href="{% url 'classifieds:seller_dashboard' %}" class="btn btn-secondary">Cancel</a>
-========
-        <a href="{% url 'user_management:seller_dashboard' %}" class="btn btn-secondary">Cancel</a>
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/delete_ad_confirm.html
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 </div>

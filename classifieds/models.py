@@ -1,13 +1,9 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-<<<<<<<< HEAD:classifieds/models.py
-from accounts.models import User  # Assuming Seller is linked via User
-========
-from users.models import User  # Assuming Seller is linked via User
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/models.py
+from accounts.models import User
 
-# ------------------ Seller Model ------------------
+
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='seller')
     business_name = models.CharField(max_length=100)
@@ -23,11 +19,7 @@ class Seller(models.Model):
     def __str__(self):
         return f"{self.user.first_name} ({self.business_name})"
 
-    
 
-
-
-# ------------------ Category Model ------------------
 class Category(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
@@ -46,7 +38,6 @@ class Category(models.Model):
         return self.name
 
 
-# ------------------ City Model ------------------
 class City(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True, blank=True)
@@ -66,7 +57,6 @@ class City(models.Model):
         return self.name
 
 
-# ------------------ Ad Model ------------------
 class Ad(models.Model):
     STATUS_CHOICES = [
         ('PENDING', 'Pending'),
@@ -80,7 +70,6 @@ class Ad(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
-    # image = models.ImageField(upload_to='ads/', blank=True, null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
     reviewed_by = models.ForeignKey(
         User,

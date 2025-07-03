@@ -1,10 +1,6 @@
 from django import forms
 from .models import Ad, Seller,City
-<<<<<<<< HEAD:classifieds/forms.py
 from accounts.models import User
-========
-from users.models import User
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/forms.py
 
 class AdForm(forms.ModelForm):
     class Meta:

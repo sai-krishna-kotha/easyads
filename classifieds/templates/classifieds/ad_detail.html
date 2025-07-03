@@ -7,11 +7,9 @@ Ad Details
 {% block content %}
 <div class="flex container py-4 justify-content-between">
     <div class="row">
-        <!-- Main Content -->
         <div class="col-lg-8 col-md-7">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <!-- Header Section -->
                     <div class="mb-4">
                         <h1 class="h2 mb-2">{{ ad.title }}</h1>
                         <div class="d-flex align-items-center mb-3">
@@ -21,13 +19,11 @@ Ad Details
                         <h3 class="text-success fw-bold">₹{{ ad.price }}</h3>
                     </div>
 
-                    <!-- Description Section -->
                     <div class="mb-4">
                         <h5>Description</h5>
                         <p class="text-muted">{{ ad.description }}</p>
                     </div>
 
-                    <!-- Ad Details -->
                     <div class="mb-4">
                         <h5>Ad Details</h5>
                         <div class="row">
@@ -47,9 +43,7 @@ Ad Details
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="col-lg-4 col-md-5">
-            <!-- Seller Info Card -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header">
                     <h6 class="mb-0">Seller Information</h6>
@@ -66,37 +60,22 @@ Ad Details
                         </div>
                     </div>
                     
-                    <!-- Contact Actions -->
-<<<<<<<< HEAD:classifieds/templates/app2_ads/ad_detail.html
                     <a href="{% url 'classifieds:seller_profile' ad.seller.pk %}" class="btn btn-primary text-decoration-none d-block">
-========
-                    <a href="{% url 'user_management:seller_profile' ad.seller.pk %}" class="btn btn-primary text-decoration-none d-block">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/ad_detail.html
                         <i class="bi bi-heart me-2"></i>See Profile
                     </a>
                     
                 </div>
             </div>
-
-            <!-- Quick Actions Card -->
             <div class="card shadow-sm">
                 <div class="card-body">
                     <div class="d-grid gap-2">
                         {% if user.is_authenticated and user.user_type == "customer" %}
                             {% if in_wishlist %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/ad_detail.html
                                 <a href="{% url 'classifieds:remove_from_wishlist' ad.id %}" class="btn btn-danger btn-sm">
                                     ❤️ Remove from Wishlist
                                 </a>
                             {% else %}
                                 <a href="{% url 'classifieds:add_to_wishlist' ad.id %}" class="btn btn-outline-primary btn-sm">
-========
-                                <a href="{% url 'user_management:remove_from_wishlist' ad.id %}" class="btn btn-danger btn-sm">
-                                    ❤️ Remove from Wishlist
-                                </a>
-                            {% else %}
-                                <a href="{% url 'user_management:add_to_wishlist' ad.id %}" class="btn btn-outline-primary btn-sm">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/ad_detail.html
                                     🤍 Add to Wishlist
                                 </a>
                             {% endif %}
@@ -105,24 +84,12 @@ Ad Details
                                 🔒 Sign in to add to wishlist
                             </a>
                         {% endif %}
-
-<<<<<<<< HEAD:classifieds/templates/app2_ads/ad_detail.html
-                        {% comment %} <a href="{% url 'classifieds:add_to_wishlist' ad.pk %}" class="btn btn-success text-decoration-none d-block">
-========
-                        {% comment %} <a href="{% url 'user_management:add_to_wishlist' ad.pk %}" class="btn btn-success text-decoration-none d-block">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/ad_detail.html
-                            <i class="bi bi-heart me-2"></i>Add to Wishlist
-                        </a> {% endcomment %}
                         <a href="" class="btn btn-sm btn-outline-secondary text-decoration-none d-block">
                             <i class="bi bi-heart me-2"></i>Share Ad
                         </a>
                         
                         {% if ad.seller.user == request.user %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/ad_detail.html
                         <a href="{% url 'classifieds:edit_ad' ad.pk %}" class="btn btn-sm btn-outline-secondary text-decoration-none d-block">
-========
-                        <a href="{% url 'user_management:edit_ad' ad.pk %}" class="btn btn-sm btn-outline-secondary text-decoration-none d-block">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/ad_detail.html
                             <i class="bi bi-heart me-2"></i>Edit Ad
                         </a>
                         {% endif %}
@@ -132,20 +99,13 @@ Ad Details
     </div>
 
 </div>
-    <!-- Navigation -->
-    {% comment %} <div class="d-flex container py-4"> {% endcomment %}
-
     <div class="row my-5 ">
         <div class="col-12 d-flex justify-content-between">
             <a href="{% url 'home' %}" class="btn btn-secondary">
                 <i class="bi bi-arrow-left me-2"></i>Back to Listings
             </a>
             {% if ad.seller.user == request.user %}
-<<<<<<<< HEAD:classifieds/templates/app2_ads/ad_detail.html
             <a href="{% url 'classifieds:seller_dashboard' %}" class="btn btn-secondary">
-========
-            <a href="{% url 'user_management:seller_dashboard' %}" class="btn btn-secondary">
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/templates/app2_ads/ad_detail.html
                 <i class="bi bi-arrow-left me-2"></i>Seller Dashboard
             </a>
             {% else %}

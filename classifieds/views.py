@@ -6,14 +6,11 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Ad, Seller, Category, City, Customer
-<<<<<<<< HEAD:classifieds/views.py
 from accounts.models import User
-========
-from users.models import User
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
 from .forms import AdForm, SellerForm, ContactForm
 from django.views import View
 from django.db.models import Q
+
 
 class SellerRegistrationView(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
@@ -25,11 +22,7 @@ class SellerRegistrationView(LoginRequiredMixin, UserPassesTestMixin, View):
     
     def get(self, request):
         form = SellerForm()
-<<<<<<<< HEAD:classifieds/views.py
         return render(request, 'classifieds/seller_registration.html', {'form': form})
-========
-        return render(request, 'user_management/seller_registration.html', {'form': form})
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
 
     def post(self, request):
         form = SellerForm(request.POST)
@@ -38,30 +31,17 @@ class SellerRegistrationView(LoginRequiredMixin, UserPassesTestMixin, View):
             seller.user = request.user
             seller.verified = True
             seller.save()
-<<<<<<<< HEAD:classifieds/views.py
             return redirect('classifieds:seller_dashboard')
-========
-            return redirect('user_management:seller_dashboard')
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
         else:
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{field}: {error}")
-<<<<<<<< HEAD:classifieds/views.py
             return redirect('classifieds:seller_dashboard')
-========
-            return redirect('user_management:seller_dashboard')
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
-    
 
 
 class SellerDashboardView(LoginRequiredMixin,  ListView):
     model = Ad
-<<<<<<<< HEAD:classifieds/views.py
     template_name = 'classifieds/seller_dashboard.html'
-========
-    template_name = 'user_management/seller_dashboard.html'
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
     context_object_name = 'ads'
 
     def get_queryset(self):
@@ -81,13 +61,8 @@ class SellerDashboardView(LoginRequiredMixin,  ListView):
 class AdCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Ad
     form_class = AdForm
-<<<<<<<< HEAD:classifieds/views.py
     template_name = 'classifieds/create_ad.html'
     success_url = reverse_lazy('classifieds:seller_dashboard')
-========
-    template_name = 'user_management/create_ad.html'
-    success_url = reverse_lazy('user_management:seller_dashboard')
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
 
     def test_func(self):
         current_user = self.request.user.user_type
@@ -106,14 +81,8 @@ class AdCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class AdUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ad
     form_class = AdForm
-<<<<<<<< HEAD:classifieds/views.py
     template_name = 'classifieds/edit_ad.html'
     success_url = reverse_lazy('classifieds:seller_dashboard')
-========
-    template_name = 'user_management/edit_ad.html'
-    success_url = reverse_lazy('user_management:seller_dashboard')
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
-
     def test_func(self):
         ad = self.get_object()
         current_user = self.request.user
@@ -124,20 +93,15 @@ class AdUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def get_queryset(self):
         seller = get_object_or_404(Seller, user=self.request.user)
-        return Ad.objects.filter(seller=seller)  # Ensures seller can only edit their own ads
+        return Ad.objects.filter(seller=seller)
+    
 
 class AdDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Ad
-<<<<<<<< HEAD:classifieds/views.py
-    template_name = 'classifieds/delete_ad_confirm.html'  # You'll create this
+    template_name = 'classifieds/delete_ad_confirm.html'
     success_url = reverse_lazy('classifieds:seller_dashboard')
-========
-    template_name = 'user_management/delete_ad_confirm.html'  # You'll create this
-    success_url = reverse_lazy('user_management:seller_dashboard')
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
 
     def test_func(self):
-        # Only allow the admin and seller who owns the ad to delete it
         ad = self.get_object()
         current_user = self.request.user
         return ad.seller.user == current_user or current_user.user_type == 'admin'
@@ -145,13 +109,10 @@ class AdDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def handle_no_permission(self):
         return HttpResponseForbidden("You are not authorized to access this page.")
 
+
 class AdDetailView(DetailView):
     model = Ad
-<<<<<<<< HEAD:classifieds/views.py
     template_name = 'classifieds/ad_detail.html'
-========
-    template_name = 'user_management/ad_detail.html'
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
     context_object_name = 'ad'
 
     def get_context_data(self, **kwargs):
@@ -166,6 +127,7 @@ class AdDetailView(DetailView):
 
         context['in_wishlist'] = in_wishlist
         return context
+    
 
 class HomePageView(View):
     def get(self, request):
@@ -213,35 +175,27 @@ class HomePageView(View):
 
 class SellerProfileView(LoginRequiredMixin, DetailView):
     model = Seller
-<<<<<<<< HEAD:classifieds/views.py
     template_name = 'classifieds/seller_profile.html'
-========
-    template_name = 'user_management/seller_profile.html'
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
     context_object_name = 'seller'
 
     def get_queryset(self):
-        # Restrict sellers only to those who are verified if needed
         return Seller.objects.filter(verified=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         seller = self.get_object()
-        # Attach ads for display
         context['all_ads'] = seller.ads.all()
-        context['ads'] = seller.ads.filter(status='Approved')  # only active ads
+        context['ads'] = seller.ads.filter(status='Approved')
         for ad in context['ads']:
             print(ad.title)
             print(ad.seller.user)
         print(context['ads'])
         return context
+    
+
 class CustomerDashboardView(LoginRequiredMixin, ListView):
     model = Customer
-<<<<<<<< HEAD:classifieds/views.py
     template_name = 'classifieds/customer_dashboard.html'
-========
-    template_name = 'user_management/customer_dashboard.html'
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
     context_object_name = 'ads'
 
     def get_queryset(self):
@@ -250,17 +204,14 @@ class CustomerDashboardView(LoginRequiredMixin, ListView):
             return self.customer.wishlist.all()
         return []
     
+
 class CustomerProfileView(LoginRequiredMixin, DetailView):
     model = Customer
-<<<<<<<< HEAD:classifieds/views.py
     template_name = 'classifieds/customer_profile.html'
-========
-    template_name = 'user_management/customer_profile.html'
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/views.py
     context_object_name = 'customer'
 
     def get_object(self, queryset=None):
-        return self.request.user.customer  # gets customer linked to current user
+        return self.request.user.customer 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -279,6 +230,8 @@ class AddToWishlist(LoginRequiredMixin, View):
             request.user.seller.wishlist.add(ad)
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
+    
+
 class RemoveFromWishlist(LoginRequiredMixin, View):
     def get(self, request, pk):
         ad = get_object_or_404(Ad, pk=pk)
@@ -289,9 +242,12 @@ class RemoveFromWishlist(LoginRequiredMixin, View):
 
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
+
 class AboutView(View):
     def get(self, request):
         return render(request, 'about.html')
+    
+
 class ContactView(View):
     def get(self, request):
         form = ContactForm()

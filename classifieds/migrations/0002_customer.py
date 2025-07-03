@@ -8,11 +8,8 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-<<<<<<<< HEAD:classifieds/migrations/0002_customer.py
         ('classifieds', '0001_initial'),
-========
-        ('user_management', '0001_initial'),
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/migrations/0002_customer.py
+
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -22,11 +19,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='customer', to=settings.AUTH_USER_MODEL)),
-<<<<<<<< HEAD:classifieds/migrations/0002_customer.py
                 ('wishlist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='fav_ads', to='classifieds.ad')),
-========
-                ('wishlist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='fav_ads', to='user_management.ad')),
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/migrations/0002_customer.py
             ],
         ),
     ]

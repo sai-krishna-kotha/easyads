@@ -69,15 +69,9 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('reviewed_by', models.ForeignKey(blank=True, limit_choices_to={'is_staff': True}, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='reviewed_ads', to=settings.AUTH_USER_MODEL)),
-<<<<<<<< HEAD:classifieds/migrations/0001_initial.py
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='classifieds.category')),
                 ('city', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='classifieds.city')),
                 ('seller', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ads', to='classifieds.seller')),
-========
-                ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='user_management.category')),
-                ('city', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='user_management.city')),
-                ('seller', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ads', to='user_management.seller')),
->>>>>>>> 260fb9cf69e02f6c538eae5c14c1c6b8f96d97d5:user_management/migrations/0001_initial.py
             ],
             options={
                 'verbose_name': 'Ad',

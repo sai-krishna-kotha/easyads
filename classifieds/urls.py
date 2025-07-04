@@ -11,6 +11,8 @@ from .views import (
     CustomerProfileView,
     AddToWishlist,
     RemoveFromWishlist,
+
+    not_authorized,
 )
 
 app_name = 'classifieds'
@@ -26,4 +28,6 @@ urlpatterns = [
     path('customer_profile/',CustomerProfileView.as_view(), name='customer_profile'),
     path('add_it/<int:pk>', AddToWishlist.as_view(), name="add_to_wishlist"),
     path('remove_it/<int:pk>', RemoveFromWishlist.as_view(), name="remove_from_wishlist"),
+
+    path('not_authorized', not_authorized, name="not_authorized")
 ]

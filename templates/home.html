@@ -13,15 +13,18 @@ Home - EasyAd
             <div class="col-md-8">
                 <h1 class="display-5 fw-bold mb-3">Find Everything You Need</h1>
                 <p class="lead mb-4">Buy and sell anything in your local area with EasyAd - India's trusted classified marketplace</p>
-                <a href="
-                {% if request.user.user_type == 'seller' %}
-                {% url 'classifieds:create_ad' %}
-                {% elif request.user.user_type == 'customer' %}
-                {% url 'home' %}
-                {% else %}
-                {% url 'accounts:signin' %}
-                {% endif %}
-                " class="btn btn-warning btn-lg">
+{% if request.user.user_type != 'customer' %}
+    {% if request.user.user_type == 'admin' or request.user.seller %}
+        {% url 'classifieds:create_ad' as post_ad_url %}
+    {% else %}
+        {% url 'classifieds:seller_registration' as post_ad_url %}
+    {% endif %}
+{% elif request.user.user_type == 'customer' %}
+    {% url 'classifieds:not_authorized' as post_ad_url %}
+{% else %}
+    {% url 'accounts:signin' as post_ad_url %}
+{% endif %}
+                <a href="{{post_ad_url}}" class="btn btn-warning btn-lg">
                     <i class="bi bi-plus-circle me-2"></i>Post Free Ad
                 </a>
             </div>

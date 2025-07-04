@@ -1,8 +1,7 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import (ListView, CreateView, UpdateView, View,DeleteView,DetailView)
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        LoginRequiredMixin, UserPassesTestMixin)
+from django.contrib.auth.mixins import (LoginRequiredMixin, LoginRequiredMixin, UserPassesTestMixin)
 from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Ad, Seller, Category, City, Customer
@@ -260,3 +259,6 @@ class ContactView(View):
             messages.success(request, "Thanks! Your message has been sent.")
             return redirect('contact')
         return render(request, 'contact.html', {'form': form})
+    
+def not_authorized(request):
+    return HttpResponseForbidden(render(request, "not_authorized.html"))

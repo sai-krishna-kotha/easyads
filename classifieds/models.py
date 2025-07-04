@@ -98,5 +98,13 @@ class Ad(models.Model):
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='customer')
     wishlist = models.ManyToManyField(Ad, blank=True, related_name='wishlisted_by')
+    class Meta:
+        verbose_name = "Customer"
+        verbose_name_plural = "Customers"
+        ordering = ['user']
+        db_table = 'customer'
+        constraints = [
+            models.UniqueConstraint(fields=['user'], name='unique_customer_user')
+        ]
     def __str__(self):
         return f"{self.user}"

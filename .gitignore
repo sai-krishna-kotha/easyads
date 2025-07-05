@@ -10,4 +10,4 @@ __pycache__/
 staticfiles/
 certs/ca.pem
 
-scripts/
+scripts/ 

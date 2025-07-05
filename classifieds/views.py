@@ -121,9 +121,11 @@ class AdDetailView(DetailView):
         in_wishlist = False
         user = self.request.user
 
-        if user.is_authenticated and hasattr(user, 'customer'):
-            in_wishlist = ad in user.customer.wishlist.all()
-
+        if user.is_authenticated:
+            if user.user_type == 'customer':
+                in_wishlist = ad in user.customer.wishlist.all()
+            if user.user_type == 'seller':
+                in_wishlist = ad in user.seller.wishlist.all()
         context['in_wishlist'] = in_wishlist
         return context
     
@@ -135,7 +137,7 @@ class HomePageView(View):
         city_slug = request.GET.get('city')
         query = request.GET.get('q', '')
 
-        ads = Ad.objects.filter(status="Approved")
+        ads = Ad.objects.filter(status="APPROVED")
         
         if category_slug:
             ads = ads.filter(category__slug=category_slug)
@@ -160,7 +162,7 @@ class HomePageView(View):
 
         categories = Category.objects.all()
         cities = City.objects.all()
-
+        print(ads)
         return render(request, 'home.html', {
             'ads': ads,
             'sort_option': sort_option,

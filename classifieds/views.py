@@ -186,7 +186,7 @@ class SellerProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         seller = self.get_object()
         context['all_ads'] = seller.ads.all()
-        context['ads'] = seller.ads.filter(status='Approved')
+        context['ads'] = seller.ads.filter(status='APPROVED')
         # for ad in context['ads']:
             # print(ad.title)
             # print(ad.seller.user)

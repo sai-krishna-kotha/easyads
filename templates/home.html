@@ -13,7 +13,7 @@ Home - EasyAd
             <div class="col-md-8">
                 <h1 class="display-5 fw-bold mb-3">Find Everything You Need</h1>
                 <p class="lead mb-4">Buy and sell anything in your local area with EasyAd - India's trusted classified marketplace</p>
-{% if request.user.user_type != 'customer' %}
+{% if request.user.is_authenticated and request.user.user_type != 'customer' %}
     {% if request.user.user_type == 'admin' or request.user.seller %}
         {% url 'classifieds:create_ad' as post_ad_url %}
     {% else %}

@@ -10,7 +10,7 @@ from classifieds.models import Customer
 def signup(request):
     if request.method == 'POST':
         form = UserSignUpForm(request.POST)
-        print(form.is_valid())
+        # print(form.is_valid())
         if form.is_valid():
             user = form.save()
             messages.success(request, "Account created successfully. You can now log in.")
@@ -18,7 +18,7 @@ def signup(request):
                 Customer.objects.create(user=user)
             return redirect('accounts:signin') 
         else:
-            print(form.errors.items())
+            # print(form.errors.items())
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{error}")
@@ -31,16 +31,16 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        print(form.is_valid())
+        # print(form.is_valid())
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user_type = form.cleaned_data['user_type']
-            print(form.cleaned_data)
+            # print(form.cleaned_data)
             try:
                 user = authenticate(request, email=email, password=password, user_type=user_type)
                 if user is not None:
-                    print(user.user_type)
+                    # print(user.user_type)
                     login(request, user)
                     return redirect('home')  
                 else:

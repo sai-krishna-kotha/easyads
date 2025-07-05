@@ -162,7 +162,7 @@ class HomePageView(View):
 
         categories = Category.objects.all()
         cities = City.objects.all()
-        print(ads)
+        # print(ads)
         return render(request, 'home.html', {
             'ads': ads,
             'sort_option': sort_option,
@@ -187,10 +187,10 @@ class SellerProfileView(LoginRequiredMixin, DetailView):
         seller = self.get_object()
         context['all_ads'] = seller.ads.all()
         context['ads'] = seller.ads.filter(status='Approved')
-        for ad in context['ads']:
-            print(ad.title)
-            print(ad.seller.user)
-        print(context['ads'])
+        # for ad in context['ads']:
+            # print(ad.title)
+            # print(ad.seller.user)
+        # print(context['ads'])
         return context
     
 
@@ -218,7 +218,7 @@ class CustomerProfileView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         customer = self.get_object()
         context['wishlist'] = customer.wishlist.all()
-        print(context['wishlist'])
+        # print(context['wishlist'])
         return context
 
 

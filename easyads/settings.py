@@ -87,24 +87,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'easyads.wsgi.application'
 
 # LOCAL DEV DATABASE
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'easyad_db',
-        'USER': 'root',  
-        'PASSWORD': 'Krishna@2004',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'easyad_db',
+#         'USER': 'root',  
+#         'PASSWORD': 'Krishna@2004',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 # ONLINE RENDER DATABASE
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=os.environ.get("DATABASE_URL"),
-#         conn_max_age=600
-#     )
-# }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=600
+    )
+}
 
 # ONLINE AIVEN DATABASE
 # DATABASES = {

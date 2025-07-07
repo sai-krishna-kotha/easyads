@@ -20,18 +20,19 @@ from django.urls import path,include
 from accounts.views import signin,health
 from classifieds.views import HomePageView,AboutView,ContactView
 from django.conf.urls.static import static
-
+from easyads import views
 
 
 urlpatterns = [
-    path('admin/login/', signin,name="signin"),
+    # path('admin/login/', signin,name="signin"),
     path('health/',health, name="health"),
-    path('admin/', admin.site.urls),
-    path('',HomePageView.as_view(), name='home'),
-    path('about/',AboutView.as_view(), name="about"),
-    path('contact/',ContactView.as_view(), name="contact"),
-    path('users/', include('accounts.urls')),
-    path('ads/', include('classifieds.urls')),
+    # path('admin/', admin.site.urls),
+    # path('',HomePageView.as_view(), name='home'),
+    path('',views.maintenance, name="main"),
+    # path('about/',AboutView.as_view(), name="about"),
+    # path('contact/',ContactView.as_view(), name="contact"),
+    # path('users/', include('accounts.urls')),
+    # path('ads/', include('classifieds.urls')),
 ]
 
 if settings.DEBUG:

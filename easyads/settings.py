@@ -24,8 +24,8 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = os.environ.get('DEBUG', default=False) == 'True'
-# DEBUG = True
+# DEBUG = os.environ.get('DEBUG', default=False) == 'True'
+DEBUG = True
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 # ALLOWED_HOSTS = ['127.0.0.1','localhost','easyads-9ch9.onrender.com']
 
@@ -87,24 +87,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'easyads.wsgi.application'
 
 # LOCAL DEV DATABASE
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'easyads_db',
-#         'USER': 'root',  # or your MySQL username
-#         'PASSWORD': 'Krishna@2004',  # use your real password
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'easyad_db',
+        'USER': 'root',  
+        'PASSWORD': 'Krishna@2004',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 # ONLINE RENDER DATABASE
-DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.environ.get("DATABASE_URL"),
+#         conn_max_age=600
+#     )
+# }
 
 # ONLINE AIVEN DATABASE
 # DATABASES = {

@@ -86,6 +86,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'easyads.wsgi.application'
 
+# Dummy DB for maintenance
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.dummy',
+    }
+}
+
+
 # LOCAL DEV DATABASE
 # DATABASES = {
 #     'default': {

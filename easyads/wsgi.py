@@ -11,6 +11,12 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+# Skip migration checks in maintenance mode
+if os.getenv("SKIP_DJANGO_MIGRATION_CHECK"):
+    from django.apps.registry import apps
+    if not apps.ready:
+        apps.skip_check(apps.EVERY_CHECK)
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easyads.settings')
 
 application = get_wsgi_application()
